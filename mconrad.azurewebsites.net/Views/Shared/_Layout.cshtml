@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Welcome to Michael Conrad's development website</title>
+    <meta name="description" content="On this page you might find updates and a list of open source projects I'm interested in or working on... Cache Manager is a common interface and abstraction layer for caching. It supports various cache providers and implements many advanced features. " />
+    <meta http-equiv="Content-Type" content="text/html;" charset="UTF-8">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/fontAwesome")
+</head>
+<body>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <div class="container">
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Michael Conrad</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+    @Html.Partial("_GoogleTracking")
+    <script type="application/ld+json">
+        {"@@context":"http://schema.org","@@type":"Product","name":"Cache Manager","description":"CacheManager is a common interface and abstraction layer for caching. It supports various cache providers and implements many advanced features.","url":"https://github.com/MichaCo/CacheManager","sameAs":["http://michaco.github.io/CacheManager","http://michaco.github.io/Documentation/CacheManager/Help"]}
+    </script>
+    <script type="application/ld+json">
+        {"@@context":"http://schema.org","@@type":"Person","name":"Michael Conrad","url":"http://michaco.github.io/","sameAs":["https://twitter.com/micha_conrad","https://www.youtube.com/channel/UCszMc4v0IwG14tf5NGhk4AA","https://plus.google.com/107267611548768829420"]}
+    </script>
+
+</body>
+</html>

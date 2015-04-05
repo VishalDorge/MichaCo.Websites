@@ -1,0 +1,195 @@
+﻿body{
+    background-image:url("Images/bg.jpg");
+    background-position: top center;
+    background-size: auto;
+    background-attachment:fixed;
+}        
+.site-content{
+    background-color:#fff;
+    margin-top:20px;
+    border-radius:10px;
+}
+.tile-red{
+    background-color:#ac193d;
+    border:2px solid #ac193d;
+}
+.tile-green{
+    background-color:#107c10;
+    border:2px solid #107c10;
+}
+.tile-blue{
+    background-color:#0072c6;
+    border:2px solid #0072c6;
+}
+.tile-purple{
+    background-color:#5133ab;
+    border:2px solid #5133ab;
+}
+.tile-purple2{
+    background-color:#80397b;
+    border:2px solid #80397b;
+}
+.tile-skype{
+    background-color:#00aff0;
+    border:2px solid #00aff0;
+}
+.tile-organge{
+    background-color:#d24726;
+    border:2px solid #d24726;
+}
+.tile-magenta{
+    background-color:#008299;
+    border:2px solid #008299;
+}
+.tile-darkgray{
+    background-color:#464646;
+    border:2px solid #464646;
+}
+.tile{
+    color:#ffffff;
+    margin:2px;
+    float:left;
+}
+.tile-1-1{
+    width:78px;
+    height:78px;
+}
+.tile-2-1{
+    width:160px;
+    height:78px;
+}
+.tile-2-2{
+    width:160px;
+    height:160px;
+}
+.tile-4-4{
+    width:324px;
+    height:324px;
+}
+.tile:hover{
+    border: 2px solid #b2b2b2;
+}
+.tile:active{
+    border: 2px solid #d5d5d5;
+}
+.tile-panel .title{
+    font-size: 16px;
+}
+.tile-panel{
+    float:left;
+    min-width:380px !important;
+    width:380px !important;
+    /* 7px left/rigth */
+    color:#ffffff;
+    font-size:13px;
+    padding: 40px;
+}
+.tile-panel h1, .tile-panel h2, .tile-panel h3, .tile-panel h4 {
+    color:#ffffff;
+}
+.tile-panel a{
+    color:#e5e5e5;
+}
+.tile-panel a:hover{
+    color:#ffffff;
+}
+.tile-panel .col-lg-1, .tile-panel .col-lg-10, .tile-panel .col-lg-11,.tile-panel .col-lg-12,.tile-panel .col-lg-2, .tile-panel .col-lg-3, .tile-panel .col-lg-4, .tile-panel .col-lg-5, .tile-panel .col-lg-6, .tile-panel .col-lg-7, .tile-panel .col-lg-8, .tile-panel .col-lg-9, 
+.tile-panel .col-md-1, .tile-panel .col-md-10, .tile-panel .col-md-11, .tile-panel .col-md-12, .tile-panel .col-md-2, .tile-panel .col-md-3, .tile-panel .col-md-4, .tile-panel .col-md-5, .tile-panel .col-md-6, .tile-panel .col-md-7, .tile-panel .col-md-8, .tile-panel .col-md-9, 
+.tile-panel .col-sm-1, .tile-panel .col-sm-10, .tile-panel .col-sm-11, .tile-panel .col-sm-12, .tile-panel .col-sm-2, .tile-panel .col-sm-3, .tile-panel .col-sm-4, .tile-panel .col-sm-5, .tile-panel .col-sm-6, .tile-panel .col-sm-7, .tile-panel .col-sm-8, .tile-panel .col-sm-9, 
+.tile-panel .col-xs-1, .tile-panel .col-xs-10, .tile-panel .col-xs-11, .tile-panel .col-xs-12, .tile-panel .col-xs-2, .tile-panel .col-xs-3, .tile-panel .col-xs-4, .tile-panel .col-xs-5, .tile-panel .col-xs-6, .tile-panel .col-xs-7, .tile-panel .col-xs-8, .tile-panel .col-xs-9{
+    padding:0px;
+}
+@media (min-width: 768px) {
+    .tile-row{
+        width: 400px;
+    }
+}
+@media (min-width: 992px) {
+    .tile-row{
+       width: 800px;
+    }
+}
+@media (min-width: 1200px) {
+    .tile-row{
+        width: 1200px;
+    }
+}
+.tile-4-4 p {
+    padding : 20px;
+    font-size: 24px;
+    vertical-align: middle;
+}
+.tile-4-4 div {
+    padding : 20px;
+    font-size: 13px;
+    vertical-align: middle;
+}
+.tile-4-4 span {
+    float:left;
+    margin-top: -23px;
+    padding-left: 4px;
+    font-size: 13px;
+}
+.tile-4-4 i {
+    font-size: 180px;
+    text-align: center;
+    width: 100%;
+    line-height: 1.8em;
+}
+
+.tile-2-2 p {
+    padding : 20px;
+    font-size: 18px;
+    vertical-align: middle;
+}
+.tile-2-2 div {
+    padding : 20px;
+    font-size: 15px;
+    vertical-align: middle;
+}
+.tile-2-2 span {
+    float:left;
+    margin-top: -6px;
+    padding-left: 4px;
+    font-size: 13px;
+}
+.tile-2-2 i {
+    font-size: 95px;
+    width: 100%;
+    text-align: center;
+    line-height: 1.5em;
+}
+
+.tile-2-1 div {
+    padding: 6px;
+    font-size: 13px;
+}
+.tile-2-1 span {
+    float:left;
+    font-size: 13px;
+    padding-left: 4px;
+    margin-top: -11px;
+}
+.tile-2-1 i {
+    font-size: 44px;
+    text-align: center;
+    line-height: 1.5em;
+    width: 100%;
+}
+
+.tile-1-1 div {
+    padding: 6px;
+    font-size: 13px;
+}
+.tile-1-1 span {
+    float:left;
+    font-size: 13px;
+    padding-left: 4px;
+    margin-top: -11px;
+}
+.tile-1-1 i {
+    font-size: 44px;
+    text-align: center;
+    line-height: 1.5em;
+    width: 100%;
+}
