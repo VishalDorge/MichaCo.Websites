@@ -8,17 +8,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/fontAwesome")
 </head>
 <body>
+    @Html.Partial("Nav")
     <div class="container body-content">
-        <div class="row">
-            <div class="col-xs-12" style="background-color:#fff; border-radius:10px;">
-                @RenderBody()
-            </div>
-        </div>
+        @RenderBody()
     </div>
     <div class="container">
         <hr />
@@ -29,6 +25,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/site.js"></script>
     @RenderSection("scripts", required: false)
 
 
@@ -39,6 +36,5 @@
     <script type="application/ld+json">
         {"@@context":"http://schema.org","@@type":"Person","name":"Michael Conrad","url":"http://michaco.github.io/","sameAs":["https://twitter.com/micha_conrad","https://www.youtube.com/channel/UCszMc4v0IwG14tf5NGhk4AA","https://plus.google.com/107267611548768829420"]}
     </script>
-
 </body>
 </html>

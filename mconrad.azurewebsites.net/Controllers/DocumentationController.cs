@@ -6,11 +6,11 @@ using System.Web.Mvc;
 
 namespace mconrad.azurewebsites.net.Controllers
 {
-    public class CacheManagerController : Controller
+    public class DocumentationController : Controller
     {
-        // GET: Documentation
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
+            ViewBag.DocumentId = id;
             return View();
         }
     }

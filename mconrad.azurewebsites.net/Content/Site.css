@@ -193,3 +193,32 @@
     line-height: 1.5em;
     width: 100%;
 }
+
+
+/* layout with nav */
+.contentBody{
+    background-color: #fff;
+    height: 100%;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.contentHeader{
+    color:#fff;
+}
+.contentHeader h1{
+    font-size:40px; 
+    width:100%; 
+    text-align:center;
+}
+
+.navbar-inverse{
+    background-color: #000a0c;
+}
+.navbar-inverse .navbar-brand{
+    color:#fff;
+}
+.navbar-inverse .navbar-brand:hover{
+    color: #025162;
+    background-color: #212a2b;
+}

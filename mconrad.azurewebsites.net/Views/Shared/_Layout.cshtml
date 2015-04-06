@@ -12,6 +12,7 @@
     @Styles.Render("~/Content/fontAwesome")
 </head>
 <body>
+    @Html.Partial("Nav")
     <div class="container body-content">
         @RenderBody()
     </div>
@@ -24,6 +25,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/site.js"></script>
     @RenderSection("scripts", required: false)
 
 

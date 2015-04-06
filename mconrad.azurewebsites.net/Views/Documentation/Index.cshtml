@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutWithContent.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-12 contentHeader">
+        <h1>Cache Manager Documentation</h1>
+    </div>
+    <div class="col-xs-12 contentBody">
+        @{
+            var article = ViewBag.DocumentId + ".html";
+        }
+        @Html.Raw(File.ReadAllText(Server.MapPath("~/Articles/" + article)))
+    </div>
+</div>
