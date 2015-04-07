@@ -22,6 +22,8 @@
     </div>
 </p>
 
+
+
 <h1 id="features-and-architecture">Features and Architecture</h1>
 
 
@@ -104,15 +106,9 @@ cache.Remove("key", "region");
     This depends on configuration in some cases, lets have a look at the basic cache operations:
 </p>
 
-<p>
-    <code>Set</code> and <code>Put</code> adds and/or overrides a cached value. The cache manager will add or put the cache item  <br>
-    into <strong>all configured cache handles</strong>. This is necessary because in general we want to have all  <br>
-    layers of our cache in sync.
-</p>
+<p><code>Set</code> and <code>Put</code> adds and/or overrides a cached value. The cache manager will add or put the cache item into <strong>all configured cache handles</strong>. This is necessary because in general we want to have all layers of our cache in sync.</p>
 
 <p><code>Remove</code>, <code>Clear</code> and <code>ClearRegion</code> also act on all configured cache handles.</p>
-
-
 
 <h3 id="get-operations">Get operations</h3>
 
