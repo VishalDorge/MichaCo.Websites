@@ -9,7 +9,12 @@
     <div class="col-xs-12 contentBody">
         @{
             var article = ViewBag.DocumentId + ".html";
+            var fileName = Server.MapPath("~/Articles/" + article);
+            if (!File.Exists(fileName))
+            {
+                throw new InvalidOperationException("Article doesn't exist.");
+            }
         }
-        @Html.Raw(File.ReadAllText(Server.MapPath("~/Articles/" + article)))
+        @Html.Raw(File.ReadAllText(fileName))
     </div>
 </div>
