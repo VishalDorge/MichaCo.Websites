@@ -16,14 +16,13 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <div class="tile-1-1 tile tile-purple">
-                    <i class="fa fa-code"></i>
+                <div class="tile-1-1 tile">
                 </div>
                 <div class="tile-2-1 tile tile-skype">
                     <i class="fa fa-github-alt"></i>
                     <span>No content yet</span>
                 </div>
-                <div class="tile-1-1"></div>
+                <div class="tile-1-1 tile"></div>
                 <div class="tile-2-1 tile tile-blue">
                     <i class="fa fa-code-fork"></i>
                 </div>
@@ -59,15 +58,34 @@
                     </div>
                 </a>
                 <a href="http://michaco.github.io/Documentation/CacheManager/Help">
-                    <div class="tile-2-1 tile tile-red">
+                    <div class="tile-2-1 tile tile-darkgray">
                         <i class="fa fa-question-circle fa-3"></i>
                         <span>CacheManager Help</span>
                     </div>
                 </a>
-                <a href="@Url.Action("Index", "Documentation", new { Id = "CacheManager_GettingStarted" })" title="Getting started">
+                <a href="@Url.Action("Index", "Documentation", new { Id = "cachemanager_getting_started" })" title="Getting started">
                     <div class="tile-2-2 tile tile-green">
-                        <i class="fa fa-question-circle fa-3"></i>
-                        <span>Documentation</span>
+                        <i class="fa fa-rocket fa-3"></i>
+                        <span>Getting Started</span>
+                    </div>
+                </a>
+                <a href="@Url.Action("Index", "Documentation", new { Id = "cachemanager_architecture" })" title="Features and Architecture">
+                    <div class="tile-1-1 tile tile-purple">
+                        <i class="fa fa-code fa-3"></i>
+                        <span>Architecture</span>
+                    </div>
+                </a>
+                <a href="@Url.Action("Index", "Documentation", new { Id = "cachemanager_update" })" title="Update operations">
+                    <div class="tile-1-1 tile tile-organge">
+                        <i class="fa fa-repeat fa-3"></i>
+                        <span>Update</span>
+                    </div>
+                </a>
+                <div class="tile-1-1 tile"></div>
+                <a href="@Url.Action("Index", "Documentation", new { Id = "cachemanager_synchronization" })" title="Cache Synchronization">
+                    <div class="tile-1-1 tile tile-red">
+                        <i class="fa fa-refresh fa-3"></i>
+                        <span>Synch</span>
                     </div>
                 </a>
             </div>

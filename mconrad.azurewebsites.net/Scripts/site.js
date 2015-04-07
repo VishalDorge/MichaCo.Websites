@@ -1,13 +1,13 @@
 ﻿(function () {
-    /* making navbar pop out on hover */
-    $(".navbar-nav>li.dropdown").hover(
-        function (elem) {
-            $(this).addClass("open")
-        },
-        function (elem) {
-            $(this).removeClass("open")
-        }
-    );
+    /* making navbar pop out on hover (TODO: doesn't work well on mobile) */
+    //$(".navbar-nav>li.dropdown").hover(
+    //    function (elem) {
+    //        $(this).addClass("open")
+    //    },
+    //    function (elem) {
+    //        $(this).removeClass("open")
+    //    }
+    //);
     
     // back to top button
     var offset = 250;
