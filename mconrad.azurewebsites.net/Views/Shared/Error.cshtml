@@ -3,7 +3,23 @@
 @{
     ViewBag.Title = "Error";
 }
+<div class="row">
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+    <div class="col-xs-12 contentHeader">
+        <h1 class="text-danger">Ooops.</h1>
+    </div>
+    <div class="col-xs-12 contentBody">
+        <h2 class="text-danger">
+            @if (ViewBag.code == 404)
+            {
+                @("We couldn't find the page you requested, sorry bro.")
+            }
+            else
+            {
 
+                @("An error occurred while processing your request, sorry bro.")
+            }
+        </h2>
+
+    </div>
+</div>
