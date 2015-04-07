@@ -6,7 +6,19 @@
     <priority>1</priority>
   </url>
   <url>
-    <loc>http://mconrad.azurewebsites.net/CacheManager</loc>
+    <loc>http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_getting_started</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_architecture</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_update</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_synchronization</loc>
     <changefreq>weekly</changefreq>
   </url>
 </urlset>

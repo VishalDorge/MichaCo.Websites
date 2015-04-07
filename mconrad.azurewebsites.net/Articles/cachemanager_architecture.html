@@ -1,0 +1,130 @@
+﻿<p></p>
+
+<p>
+    <div class="toc">
+        <ul>
+            <li>
+                <a href="#features-and-architecture">Features and Architecture</a><ul>
+                    <li>
+                        <a href="#design-and-goals">Design and Goals</a><ul>
+                            <li><a href="#regions">Regions</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#multiple-cache-layers">Multiple Cache Layers</a></li>
+                    <li>
+                        <a href="#cache-item-handling">Cache Item handling</a><ul>
+                            <li><a href="#get-operations">Get operations</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</p>
+
+<h1 id="features-and-architecture">Features and Architecture</h1>
+
+
+
+<h2 id="design-and-goals">Design and Goals</h2>
+
+<p>
+    First and foremost Cache Manager will provide well known cache methods like Get, Put, Remove.  <br>
+    All cache items will have a <code>string Key</code> and <code>T</code> Value where <code>T</code> can be anything, e.g. <code>int</code>, <code>string</code> or even <code>object</code>.
+</p>
+
+<pre><code>cache.Add("key", "value");
+var value = cache.Get("key");
+cache.Remove("key");
+</code></pre>
+
+
+
+<h3 id="regions">Regions</h3>
+
+<p>Cache Manager has overloads for all cache methods to support a <code>string Region</code> in addition to the <code>Key</code> to identify an item within the cache. </p>
+
+<pre><code>cache.Add("key", "value", "region");
+var value = cache.Get("key", "region");
+cache.Remove("key", "region");
+</code></pre>
+
+<blockquote>
+    <p>
+        <strong>Note</strong>  <br>
+        Each cache handle might implement cache regions differently. Often the implementation will simply concatenate <code>region + key</code> to form the cache key.  <br>
+        Also the cache <code>Key</code> will only be accessible together with the region specified.
+    </p>
+</blockquote>
+
+<p>To clear a cache region, you can call <code>cache.ClearRegion("region")</code></p>
+
+
+
+<h2 id="multiple-cache-layers">Multiple Cache Layers</h2>
+
+<p>
+    One of the main feature of Cache Manager is handling multiple cache layers. To define the cache layers the cache manager can have one or many so called cache handles. <br>
+    Each Cache Manager package for a cache provider implement such a cache handle.
+</p>
+
+<p>This concept makes it very flexible in terms of caching strategy. And it makes it easy to start with and maybe create a more complex cache later.</p>
+
+<p>
+    To configure and add cache handles by code call the <code>WithHandle</code> method of the <code>ConfigurationBuilder</code>.  <br>
+    Every cache provider specific Cache Manager package will provide an extension method to add the specific cache handle, e.g. <code>WithSystemRuntimeCacheHandle</code>, <code>WithRedisCacheHandle</code>…
+</p>
+
+<p>Example:</p>
+
+<pre><code>var cache = CacheFactory.Build("myCacheName", settings =&gt;
+{
+    settings
+        .WithSystemRuntimeCacheHandle("handle1");
+});
+</code></pre>
+
+<p>Adding multiple cache handles looks pretty much the same:</p>
+
+<pre><code>var cache = CacheFactory.Build("myCacheName", settings =&gt;
+{
+    settings
+        .WithSystemRuntimeCacheHandle("handle1")
+        .And
+        .WithRedisCacheHandle("redis");
+});
+</code></pre>
+
+
+
+<h2 id="cache-item-handling">Cache Item handling</h2>
+
+<p>
+    Now how does the BaseCacheManager handle items in multiple caches? <br>
+    This depends on configuration in some cases, lets have a look at the basic cache operations:
+</p>
+
+<p>
+    <code>Set</code> and <code>Put</code> adds and/or overrides a cached value. The cache manager will add or put the cache item  <br>
+    into <strong>all configured cache handles</strong>. This is necessary because in general we want to have all  <br>
+    layers of our cache in sync.
+</p>
+
+<p><code>Remove</code>, <code>Clear</code> and <code>ClearRegion</code> also act on all configured cache handles.</p>
+
+
+
+<h3 id="get-operations">Get operations</h3>
+
+<p>
+    Let’s say we have two cache handles configured, and the <code>Get</code> operation finds the <code>Key</code> within the second cache handle.  <br>
+    Now we can assume that the two configured layers of the cache have some purpose and that the CacheManager should maybe update the other cache handles.
+</p>
+
+<p>There are 3 different configuration options for Cache Manager to handle this, defined by <code>CacheUpdateMode</code>:</p>
+
+<ul>
+    <li><strong>None</strong> - setting <code>CacheUpdateMode</code>to <code>None</code> will instruct the Cache Manager to do nothing on cache hits.</li>
+    <li><strong>Up</strong> - instructs the Cache Manager to update cache handles “above” the one the cache item was found in. The order of the cache handles matter in this case. </li>
+    <li><strong>All</strong> - instructs the Cache Manager to update all other cache handles</li>
+</ul>

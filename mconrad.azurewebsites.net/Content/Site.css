@@ -3,12 +3,34 @@
     background-position: top center;
     background-size: auto;
     background-attachment:fixed;
-}        
+}
 .site-content{
     background-color:#fff;
     margin-top:20px;
     border-radius:10px;
 }
+
+.back-to-top {
+    background: none;
+    margin: 0;
+    position: fixed;
+    bottom: 60px;
+    right: 4px;
+    z-index: 100;
+    display: none;
+    text-decoration: none;
+    color: #ffffff;
+}
+.back-to-top:hover, .back-to-top:active{
+    color: #025162;
+}
+
+.back-to-top i {
+  font-size: 60px;
+}
+
+/* tiles on start page */
+
 .tile-red{
     background-color:#ac193d;
     border:2px solid #ac193d;
@@ -194,8 +216,7 @@
     width: 100%;
 }
 
-
-/* layout with nav */
+/* layout for documentation */
 .contentBody{
     background-color: #fff;
     height: 100%;
@@ -221,4 +242,103 @@
 .navbar-inverse .navbar-brand:hover{
     color: #025162;
     background-color: #212a2b;
+}
+
+blockquote{
+    font-size:14px;
+    border-left-width: 10px;
+    background-color: rgba(128,128,128,0.05);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+h1, .h1{
+    font-size: 30px;
+}
+h2, .h2{
+    font-size: 24px;
+}
+h3, .h3{
+    font-size: 20px;
+}
+h4, .h4 {
+    font-size: 18px;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 20px; 
+    margin-bottom: 10px; 
+}
+
+code {
+    white-space: pre-wrap;
+    padding: 1px 5px;
+    color:#333;
+    font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
+    background-color: #eee;
+}
+
+svg{
+    box-sizing: border-box;
+    color: rgb(63, 63, 63);
+    display: inline;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: 18px;
+    left: -0.5px;
+    line-height: 26.1000003814697px;
+    outline-color: rgb(63, 63, 63);
+    outline-style: none;
+    outline-width: 0px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+    text-align: center;
+}
+/* TOC nav */
+#tocNav ul.nav.affix{
+    top: 80px;
+}
+
+#tocNav .nav > li > a:active, #tocNav .nav > li > a:focus,
+#tocNav .nav > .active:focus > a, #tocNav .nav > .active > a, #tocNav .nav > .active:hover > a{
+    color: #fff;
+    border-left: 2px solid #025162;
+}
+#tocNav .nav > li > a:hover, #tocNav .nav > li > a:focus{
+    color: #fff;
+    border-left: 1px solid #025162;    
+    background-color: transparent;
+}
+
+#tocNav .nav > li > a {
+    color: #d5d5d5;
+    padding-left: 15px;
+}
+#tocNav .nav > li > a:hover, #tocNav .nav > li > a:active {
+    padding-left : 14px;
+}
+#tocNav .nav > li > a:focus
+#tocNav .nav > .active:focus > a, #tocNav .nav > .active > a, #tocNav .nav > .active:hover > a{
+    padding-left : 13px;
+}
+
+#tocNav .nav .nav > li > a{
+    padding-left : 25px;
+}
+#tocNav .nav .nav > li > a:hover, #tocNav .nav .nav > li > a:focus, #tocNav .nav .nav > li > a:active {
+    padding-left : 24px;
+}
+#tocNav .nav .nav > li > a:focus 
+#tocNav .nav .nav > .active:focus > a, #tocNav .nav .nav > .active > a, #tocNav .nav .nav > .active:hover > a{
+    padding-left : 23px;
+}
+
+#tocNav .nav .nav .nav > li > a{
+    padding-left : 35px;
+}
+#tocNav .nav .nav .nav > li > a:hover, #tocNav .nav .nav .nav > li > a:focus, #tocNav .nav .nav .nav > li > a:active {
+    padding-left : 34px;
+}
+#tocNav .nav .nav .nav > li > a:focus
+#tocNav .nav .nav .nav > .active:focus > a, #tocNav .nav .nav .nav > .active > a, #tocNav .nav .nav .nav > .active:hover > a{
+    padding-left : 33px;
 }
