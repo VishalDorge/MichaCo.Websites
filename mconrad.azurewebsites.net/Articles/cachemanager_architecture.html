@@ -6,7 +6,7 @@
 
 <p>
     First and foremost Cache Manager will provide well known cache methods like Get, Put, Remove and Clear. <br>
-    All cache items will have a <code>string Key</code> and <code>T</code> Value where <code>T</code> can be anything, e.g. <code>int</code>, <code>string</code> or even <code>object</code>.
+    All cache items will have a <code>string Key</code> and <code>T</code> Value where <code>T</code> can be anything, e.g. <code>int</code>, <code>string</code> or even <code>object</code>. The Cache Manager is implemented as a strongly typed cache interface.
 </p>
 
 <pre><code>cache.Add("key", "value");
@@ -14,8 +14,6 @@ var value = cache.Get("key");
 cache.Remove("key");
 cache.Clear();
 </code></pre>
-
-
 
 <h3 id="regions">Regions</h3>
 
@@ -187,6 +185,8 @@ cache.Add("key", "value");
     </p>
 </blockquote>
 
+
+
 <h2 id="cache-expiration">Cache Expiration</h2>
 
 <p>Setting an expiration timeout for cache items is a common thing when working with caching because we might not want the cache item to be stored in memory for ever and to free up resources.</p>
@@ -231,6 +231,25 @@ cache.Put(item);
 </blockquote>
 
 
+
+<h2 id="events">Events</h2>
+
+<p>
+    The Cache Manager <code>ICacheManager</code> interface defines several events which get triggered on cache operations.  <br>
+    The events will be fired only once per cache operation, not per cache handle!
+</p>
+
+<p>To subscribe to an event, simply add an event listener like that:</p>
+
+<pre><code>cache.OnAdd += (sender, args) =&gt; ...;
+</code></pre>
+
+<p>Events are available for <code>Add</code>, <code>Clear</code>, <code>ClearRegion</code>, <code>Get</code>, <code>Put</code>, <code>Remove</code> and <code>Update</code> operations.</p>
+
+<p>
+    The event arguments passed into the listener depend on the event, for <code>Add</code>,<code>Get</code>, <code>Put</code> and <code>Remove</code> the <code>CacheActionEventArgs</code> will provide the <code>Key</code> and <code>Region</code> of the cache operation. <code>Region</code> might be empty though. <br>
+    <code>OnClearRegion</code> will provide the <code>Region</code> and <code>OnUpdate</code> gives you the <code>UpdateItemResult</code> and <code>UdateItemConfig</code> in addition to the <code>Key</code> and <code>Region</code>.
+</p>
 
 <h2 id="statistics-and-counters">Statistics and Counters</h2>
 
@@ -296,8 +315,6 @@ cache.Put(item);
 }
 </code></pre>
 
-
-
 <h3 id="performance-counters">Performance Counters</h3>
 
 <p>
@@ -313,7 +330,7 @@ cache.Put(item);
     </p>
 </blockquote>
 
-<p>To watch performance counters in action, run “perfmon.exe”, select “Performance Monitor” and click the green plus sign on the toolbar. Now find “.Net Cache Manager” in the list, (should be at the top). And select the instances and counters you want to track.</p>
+<p>To see performance counters in action, run “perfmon.exe”, select “Performance Monitor” and click the green plus sign on the toolbar. Now find “.Net Cache Manager” in the list, (should be at the top). And select the instances and counters you want to track.</p>
 
 <p>
     The result should look similar to this: <br>
@@ -322,13 +339,24 @@ cache.Put(item);
 
 <p>The instance name displayed in Performance Monitor is the host name of your application combined with the cache and cache handle’s name. </p>
 
-
-
-<h2 id="events">Events</h2>
-
-
-
 <h2 id="systemweboutputcache">System.Web.OutputCache</h2>
+
+<p>The <a href="https://www.nuget.org/packages/CacheManager.Web/">CacheManager.Web</a> Nuget package contains an implementation for <code>System.Web.OutputCache</code> which uses the cache manager to store the page results, if the <code>OutputCache</code> is configured to store it on the server.</p>
+
+<p>Configure of the <code>OutputCache</code> can be done via web.config:</p>
+
+<pre><code> &lt;system.web&gt;       
+   &lt;caching&gt;
+     &lt;outputCache defaultProvider="CacheManagerOutputCacheProvider"&gt;
+       &lt;providers&gt;
+         &lt;add cacheName="websiteCache" name="CacheManagerOutputCacheProvider" type="CacheManager.Web.CacheManagerOutputCacheProvider, CacheManager.Web" /&gt;
+       &lt;/providers&gt;
+     &lt;/outputCache&gt;
+   &lt;/caching&gt;
+ &lt;/system.web&gt;
+</code></pre>
+
+<p>The <code>cacheName</code> attribute within the <code>add</code> tag is important. This will let CacheManager know which configuration to use. The configuration must also be provided via web.config!</p>
 
 <p>
     <div class="toc">
@@ -353,13 +381,13 @@ cache.Put(item);
                         </ul>
                     </li>
                     <li><a href="#cache-expiration">Cache Expiration</a></li>
+                    <li><a href="#events">Events</a></li>
                     <li>
                         <a href="#statistics-and-counters">Statistics and Counters</a><ul>
                             <li><a href="#statistics">Statistics</a></li>
                             <li><a href="#performance-counters">Performance Counters</a></li>
                         </ul>
                     </li>
-                    <li><a href="#events">Events</a></li>
                     <li><a href="#systemweboutputcache">System.Web.OutputCache</a></li>
                 </ul>
             </li>
