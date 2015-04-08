@@ -242,6 +242,9 @@
     <Content Include="Views\Documentation\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Home\CacheManager.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -260,7 +263,6 @@
     <Content Include="Views\Shared\_GoogleTracking.cshtml" />
     <Content Include="Views\Shared\_LayoutWithTOC.cshtml" />
     <Content Include="Views\Shared\Nav.cshtml" />
-    <Content Include="Views\Home\CacheManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
