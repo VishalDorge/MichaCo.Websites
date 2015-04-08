@@ -22,5 +22,10 @@ namespace mconrad.azurewebsites.net.Controllers
         {
             return View();
         }
+
+        public ActionResult CacheManager()
+        {
+            return View();
+        }
     }
 }

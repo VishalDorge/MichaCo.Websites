@@ -160,6 +160,7 @@
   <ItemGroup>
     <Content Include="Articles\cachemanager_architecture.html" />
     <Content Include="Articles\cachemanager_getting_started.html" />
+    <Content Include="Articles\cachemanager_readme.html" />
     <Content Include="Articles\cachemanager_synchronization.html" />
     <Content Include="Articles\cachemanager_update.html" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -259,6 +260,7 @@
     <Content Include="Views\Shared\_GoogleTracking.cshtml" />
     <Content Include="Views\Shared\_LayoutWithTOC.cshtml" />
     <Content Include="Views\Shared\Nav.cshtml" />
+    <Content Include="Views\Home\CacheManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
