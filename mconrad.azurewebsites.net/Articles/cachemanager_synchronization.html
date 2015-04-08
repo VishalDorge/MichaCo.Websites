@@ -1,21 +1,4 @@
-﻿<p>
-    <div class="toc">
-        <ul>
-            <li>
-                <a href="#cache-synchronization">Cache Synchronization</a><ul>
-                    <li>
-                        <a href="#multi-layer-use-case">Multi-Layer Use Case</a><ul>
-                            <li><a href="#challenges">Challenges</a></li>
-                            <li><a href="#cache-back-plates">Cache Back Plates</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</p>
-
-<h1 id="cache-synchronization">Cache Synchronization</h1>
+﻿<h1 id="cache-synchronization">Cache Synchronization</h1>
 
 
 
@@ -44,21 +27,105 @@
 <p>Let’s take the following scenario: </p>
 
 <ul>
-    <li>ClientA removes an item from the cache. Cache Manager will not call <code>Remove</code> on both cache handles.</li>
+    <li>
+        ClientA removes an item from the cache.  <br>
+        <ul><li>Cache Manager will call <code>Remove</code> on both cache handles.</li></ul>
+    </li>
     <li>
         ClientB does a Get on the same item <br>
         <ul><li>Cache Manager doesn’t find the item in the distributed cache, but in the in-process cache layer of ClientB</li></ul>
     </li>
 </ul>
 
-
-
-<div class="sequence-diagram"><svg height="294" version="1.1" width="486.09375" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; left: -0.5px; top: -0.1875px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><marker id="raphael-marker-endblock55-obj2828" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker><marker id="raphael-marker-endblock55-obj2831" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker><marker id="raphael-marker-endblock55-obj2834" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker><marker id="raphael-marker-endblock55-obj2837" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="10" y="20" width="64.96875" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="30" width="44.96875" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="42.484375" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">ClientA</tspan></text><rect x="10" y="235" width="64.96875" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="245" width="44.96875" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="42.484375" y="254.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">ClientA</tspan></text><path fill="none" stroke="#000000" d="M42.484375,59L42.484375,235" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="94.96875" y="20" width="72.15625" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="104.96875" y="30" width="52.15625" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="131.046875" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">InProc A</tspan></text><rect x="94.96875" y="235" width="72.15625" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="104.96875" y="245" width="52.15625" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="131.046875" y="254.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">InProc A</tspan></text><path fill="none" stroke="#000000" d="M131.046875,59L131.046875,235" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="187.125" y="20" width="90.5" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="197.125" y="30" width="70.5" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="232.375" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Distributed</tspan></text><rect x="187.125" y="235" width="90.5" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="197.125" y="245" width="70.5" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="232.375" y="254.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Distributed</tspan></text><path fill="none" stroke="#000000" d="M232.375,59L232.375,235" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="297.625" y="20" width="65.625" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="307.625" y="30" width="45.625" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="330.4375" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">ClientB</tspan></text><rect x="297.625" y="235" width="65.625" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="307.625" y="245" width="45.625" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="330.4375" y="254.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">ClientB</tspan></text><path fill="none" stroke="#000000" d="M330.4375,59L330.4375,235" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="383.25" y="20" width="72.84375" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="393.25" y="30" width="52.84375" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="419.671875" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">InProc B</tspan></text><rect x="383.25" y="235" width="72.84375" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="393.25" y="245" width="52.84375" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="419.671875" y="254.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">InProc B</tspan></text><path fill="none" stroke="#000000" d="M419.671875,59L419.671875,235" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="61.171875" y="74.5" width="51.1875" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="86.765625" y="84" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Remove</tspan></text><path fill="none" stroke="#000000" d="M42.484375,98C42.484375,98,107.33378306403756,98,126.04765033251715,98" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj2828)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="111.84375" y="113.5" width="51.171875" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="137.4296875" y="123" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Remove</tspan></text><path fill="none" stroke="#000000" d="M42.484375,137C42.484375,137,197.34902331326157,137,227.36917242476784,137" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj2831)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="252.390625" y="152.5" width="58.03125" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="281.40625" y="162" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Get(Miss)</tspan></text><path fill="none" stroke="#000000" d="M330.4375,176C330.4375,176,257.3559789657593,176,237.37275055795908,176" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj2834)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="350.34375" y="191.5" width="49.421875" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="375.0546875" y="201" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: 'Andale Mono', monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Get(Hit)</tspan></text><path fill="none" stroke="#000000" d="M330.4375,215C330.4375,215,395.853475487791,215,414.66695671938714,215" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj2837)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg></div>
-
 <p>This means that ClientB works with out of sync data. </p>
 
 <p>To prevent this, Cache Manager has a feature called <strong>CacheBackPlate</strong> which will try to synchronize multiple cache clients.</p>
 
-
-
 <h2 id="cache-back-plates">Cache Back Plates</h2>
+
+<p>A cache back plate can be added to the cache manager during configuration. </p>
+
+
+
+<h3 id="configuration">Configuration</h3>
+
+<p>Example for .config xml configuration:</p>
+
+<pre><code>    &lt;cache 
+        name="redisWithBackPlate" 
+        backPlateName="redis1" 
+        backPlateType="CacheManager.StackExchange.Redis.RedisCacheBackPlate, CacheManager.StackExchange.Redis"&gt;
+      &lt;handle name="default" ref="systemCache"/&gt;
+      &lt;handle name="redis1" ref="redis" expirationMode="None" isBackPlateSource="true"/&gt;
+    &lt;/cache&gt;
+</code></pre>
+
+<p>Example for configuration by code:</p>
+
+<pre><code>var cache = CacheFactory.Build&lt;int&gt;("myCache", settings =&gt;
+{
+    settings
+        .WithSystemRuntimeCacheHandle("inProcessCache")
+        .And
+        .WithRedisConfiguration("redis", config =&gt;
+        {
+            config.WithAllowAdmin()
+                .WithDatabase(0)
+                .WithEndpoint("localhost", 6379);
+        })
+        .WithMaxRetries(1000)
+        .WithRetryTimeout(100)
+        .WithRedisBackPlate("redis")
+        .WithRedisCacheHandle("redis", true);
+});
+</code></pre>
+
+<p>
+    In both cases configuring a back plate requires <strong>one cache handle</strong> being set as the back plate’s source.  <br>
+    In case of the xml configuration, it is the <code>isBackPlateSource</code> attribute on the cacheHandle tag and by code it is the second parameter on the <code>WithHandle</code> method being set to true.
+</p>
+
+
+
+<h3 id="back-plates-source">Back Plate’s Source</h3>
+
+<p>The back plate’s source is usually the one distributed cache layer of the Cache Manager instance. </p>
+
+<p>
+    When for example an item gets removed by one client, the other client has to remove the same item from all other cache handles but the source (because it was already removed). So for remove this is not that important. <br>
+    But let’s say a cache item was updated by ClientA and ClientB still has the old version in local in-process cache. With the source being set, Cache Manager can evict the item from all ClientB’s local in-process caches and on the next <code>Get</code> the new version will be retrieved from the “source”.
+</p>
+
+
+
+<h3 id="how-does-it-work">How does it work?</h3>
+
+<p>
+    The back plate works with messages. Every time an item gets removed or updated Cache Manager will send a message to the back plate storing the information needed to update the other clients. <br>
+    All other clients will receive those messages asynchronously and will react accordingly.
+</p>
+
+<p>That being said, because of the network traffic generated and the overhead that produces, the performance of the cache will be go down slightly. Also, the synchronization will not happen on all clients at the same time, so there might be (very small) delays. </p>
+
+<p>
+    <div class="toc">
+        <ul>
+            <li>
+                <a href="#cache-synchronization">Cache Synchronization</a><ul>
+                    <li>
+                        <a href="#multi-layer-use-case">Multi-Layer Use Case</a><ul>
+                            <li><a href="#challenges">Challenges</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#cache-back-plates">Cache Back Plates</a><ul>
+                            <li><a href="#configuration">Configuration</a></li>
+                            <li><a href="#back-plates-source">Back Plate’s Source</a></li>
+                            <li><a href="#how-does-it-work">How does it work?</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</p>
