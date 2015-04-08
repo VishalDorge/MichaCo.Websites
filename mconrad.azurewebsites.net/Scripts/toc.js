@@ -23,5 +23,8 @@
             }
         }
     });
-    $("body").scrollspy("refresh");    
+    $("body").scrollspy("refresh");
+
+    // images defined by md are not responsive, lets make them responsive
+    $("img").addClass("img-responsive");
 })();
