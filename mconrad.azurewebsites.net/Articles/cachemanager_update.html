@@ -1,12 +1,4 @@
-﻿<p>
-    <div class="toc">
-        <ul>
-            <li><a href="#update-operations">Update operations</a></li>
-        </ul>
-    </div>
-</p>
-
-<h1 id="update-operations">Update operations</h1>
+﻿<h1 id="update-operations">Update Operations</h1>
 
 <p>
     Updating a cache item in a distributed cache is different from just changing the item within an in-process cache.  <br>
@@ -14,7 +6,7 @@
 </p>
 
 <p>
-    With distributed caches, we cannot do assume the same. The cache item will be serialized and send to a server, in case multiple clients update the same item, one of the clients will win, the other one will loose. <br>
+    With distributed caches, we cannot assume the same. The cache item will be serialized and send to a server, in case multiple clients update the same item, one of the clients will win, the other one will loose. <br>
     Let’s say you have a click counter stored in a distributed cache and both clients update the number. Before the update the number was 10 and every client increase the number by 1. The result would be 11 because one client would override the update of the other client…
 </p>
 
@@ -44,3 +36,11 @@
 <p>In addition you can configure what Cache Manager should do in case a version conflict occurred during the update operation. This will be executed even if the update was not successful (maybe because of the a limit)</p>
 
 <p>Per default, Cache Manager will remove the cache item from all other handles, because it assumes the other handles don’t have the same version of the cache item.</p>
+
+<p>
+    <div class="toc">
+        <ul>
+            <li><a href="#update-operations">Update Operations</a></li>
+        </ul>
+    </div>
+</p>
