@@ -15,6 +15,8 @@ cache.Remove("key");
 cache.Clear();
 </code></pre>
 
+
+
 <h3 id="regions">Regions</h3>
 
 <p>Cache Manager has overloads for all cache methods to support a <code>string Region</code> in addition to the <code>Key</code> to identify an item within the cache. </p>
@@ -251,6 +253,8 @@ cache.Put(item);
     <code>OnClearRegion</code> will provide the <code>Region</code> and <code>OnUpdate</code> gives you the <code>UpdateItemResult</code> and <code>UdateItemConfig</code> in addition to the <code>Key</code> and <code>Region</code>.
 </p>
 
+
+
 <h2 id="statistics-and-counters">Statistics and Counters</h2>
 
 <p>
@@ -260,7 +264,7 @@ cache.Put(item);
 
 <p>The statistics and Windows performance counters. Both are stored per cache handle.</p>
 
-<p>Both can be enabled or disabled per cache manager instance. Especially performance counters can cause a performance overhead and should only be used for analysis if needed. The configuration can be done via .config file or <code>ConfigurationBuilder</code></p>
+<p>Both can be enabled or disabled per cache handle. The configuration can be done via .config file or <code>ConfigurationBuilder</code></p>
 
 <pre><code>var cache = CacheFactory.Build("cacheName", settings =&gt; settings
     .WithSystemRuntimeCacheHandle("handleName")
@@ -271,11 +275,10 @@ cache.Put(item);
 <blockquote>
     <p>
         <strong>Note</strong> <br>
-        Disabling statistics though will also disable performance counters and enabling performance counters will enable statistics.
+        Disabling statistics will also disable performance counters and enabling performance counters will enable statistics. <br>
+        Collecting the numbers and updating performance counters can cause a slight performance decrease, only use it for analysis in production if really needed.
     </p>
 </blockquote>
-
-
 
 <h3 id="statistics">Statistics</h3>
 
@@ -315,6 +318,8 @@ cache.Put(item);
 }
 </code></pre>
 
+
+
 <h3 id="performance-counters">Performance Counters</h3>
 
 <p>
@@ -338,6 +343,8 @@ cache.Put(item);
 </p>
 
 <p>The instance name displayed in Performance Monitor is the host name of your application combined with the cache and cache handle’s name. </p>
+
+
 
 <h2 id="systemweboutputcache">System.Web.OutputCache</h2>
 
