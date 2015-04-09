@@ -322,8 +322,10 @@ cache.Put(item);
 
 <h3 id="performance-counters">Performance Counters</h3>
 
+<p>If performance counters are enabled, Cache Manager will try to create a new <code>PerformanceCounterCategory</code> named “.Net CacheManager” with several counters below. </p>
+
 <p>
-    If performance counters are enabled, Cache Manager will try to create new <code>PerformanceCounterCategory</code> named “.Net CacheManager”. With several counters below. This is how it will look like in Server Explorer: <br>
+    Server Explorer: <br>
     <img src="https://github.com/MichaCo/CacheManager/raw/master/Articles/media/cachemanager-architecture/performance-counters.jpg" alt="Performance Counters in Server Explorer" title="Performance Counters">
 </p>
 
@@ -335,7 +337,7 @@ cache.Put(item);
     </p>
 </blockquote>
 
-<p>To see performance counters in action, run “perfmon.exe”, select “Performance Monitor” and click the green plus sign on the toolbar. Now find “.Net Cache Manager” in the list, (should be at the top). And select the instances and counters you want to track.</p>
+<p>To see performance counters in action, run “perfmon.exe”, select “Performance Monitor” and click the green plus sign on the toolbar. Now find “.Net Cache Manager” in the list (should be at the top)  and select the instances and counters you want to track.</p>
 
 <p>
     The result should look similar to this: <br>
@@ -344,13 +346,11 @@ cache.Put(item);
 
 <p>The instance name displayed in Performance Monitor is the host name of your application combined with the cache and cache handle’s name. </p>
 
-
-
 <h2 id="systemweboutputcache">System.Web.OutputCache</h2>
 
 <p>The <a href="https://www.nuget.org/packages/CacheManager.Web/">CacheManager.Web</a> Nuget package contains an implementation for <code>System.Web.OutputCache</code> which uses the cache manager to store the page results, if the <code>OutputCache</code> is configured to store it on the server.</p>
 
-<p>Configure of the <code>OutputCache</code> can be done via web.config:</p>
+<p>Configuration of the <code>OutputCache</code> can be done via web.config:</p>
 
 <pre><code> &lt;system.web&gt;       
    &lt;caching&gt;
@@ -363,7 +363,7 @@ cache.Put(item);
  &lt;/system.web&gt;
 </code></pre>
 
-<p>The <code>cacheName</code> attribute within the <code>add</code> tag is important. This will let CacheManager know which configuration to use. The configuration must also be provided via web.config!</p>
+<p>The <code>cacheName</code> attribute within the <code>add</code> tag is important. This will let CacheManager know which <code>cache</code> configuration to use. The configuration must also be provided via web.config, configuration by code is not supported!</p>
 
 <p>
     <div class="toc">
