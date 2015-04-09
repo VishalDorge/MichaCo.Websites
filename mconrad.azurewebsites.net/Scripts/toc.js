@@ -27,4 +27,6 @@
 
     // images defined by md are not responsive, lets make them responsive
     $("img").addClass("img-responsive");
+
+    $("#docBody table").addClass("table table-striped table-bordered");
 })();
