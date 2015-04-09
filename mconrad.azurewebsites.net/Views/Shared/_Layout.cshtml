@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
 </head>
 <body>
     @Html.Partial("Nav")
@@ -20,7 +21,6 @@
     <a href="#" class="back-to-top" style="display: inline;">
         <i class="fa fa-arrow-circle-up"></i>
     </a>
-    @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/fontAwesome")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
