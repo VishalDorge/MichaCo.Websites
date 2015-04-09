@@ -12,8 +12,7 @@
     toc.addClass("hidden-print hidden-xs hidden-sm");
 
     $("#tocNav").append(toc);
-
-
+        
     $("body").scrollspy({ target: '#tocNav' });
 
     $(toc).affix({
