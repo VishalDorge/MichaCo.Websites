@@ -4,6 +4,14 @@
     background-size: auto;
     background-attachment:fixed;
 }
+footer{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width:100%; 
+    text-align:center;
+    color: #450F0F;
+}
+
 .site-content{
     background-color:#fff;
     margin-top:20px;
