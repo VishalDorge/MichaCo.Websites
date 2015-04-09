@@ -1,9 +1,9 @@
 ﻿body{
     background-color: #a16b47;
-    /*background-image:url("Images/bg.jpg");
+    background-image:url("Images/bg.jpg");
     background-position: top center;
     background-size: auto;
-    background-attachment:fixed;*/
+    background-attachment:fixed;
 }
 footer{
     padding-top: 50px;
