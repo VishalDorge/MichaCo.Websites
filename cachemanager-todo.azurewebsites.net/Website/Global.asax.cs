@@ -1,21 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
+using System.Web.Http;
+using CacheManager.Core;
+using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.WebApi;
+using Website.Models;
 
 namespace Website
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class WebApiApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+
+            var container = new UnityContainer();
+            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
+
+            var cache = CacheFactory.Build<Todo[]>("todos", settings =>
+            {
+                settings.WithSystemRuntimeCacheHandle("inprocess");
+            });
+
+            container.RegisterInstance(cache);
         }
     }
 }
