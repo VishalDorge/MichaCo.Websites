@@ -275,7 +275,7 @@ protected ICacheManager&lt;object&gt; todoCache { get; set; }
     To persist our <code>Todo</code>s we could use some distributed cache like <a href="http://redis.io/">Redis</a> or couchbase.
 </p>
 
-<p>With Cache Manager this change is extremely easy to change. Just a few lines of configuration and there are no changes needed in our Api controller!</p>
+<p>With Cache Manager this is extremely easy to change. Just a few lines of configuration and there are no changes needed in our Api controller!</p>
 
 <pre><code>var cache = CacheFactory.Build("todos", settings =&gt;
 {
