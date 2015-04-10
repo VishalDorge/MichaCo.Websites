@@ -20,12 +20,11 @@ namespace Website
             var cache = CacheFactory.Build("todos", settings =>
             {
                 settings
-                    .WithSystemRuntimeCacheHandle("inprocess");
-                    //  .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(10))
-                    //.And
-                    //.WithRedisBackPlate("redis")
-                    //.WithRedisCacheHandle("redis", true)
-                    //    .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(20));
+                    .WithSystemRuntimeCacheHandle("inprocess")
+                      .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(10))
+                    .And
+                    .WithRedisBackPlate("redis")
+                    .WithRedisCacheHandle("redis", true);
             });
 
             container.RegisterInstance(cache);
