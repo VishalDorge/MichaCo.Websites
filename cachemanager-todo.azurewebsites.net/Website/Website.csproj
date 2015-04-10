@@ -115,6 +115,7 @@
     <Content Include="js\directives\todoEscape.js" />
     <Content Include="js\directives\todoFocus.js" />
     <Content Include="js\services\todoStorage.js" />
+    <Content Include="node_modules\angular-route\angular-route.js" />
     <Content Include="node_modules\angular\angular.js" />
     <Content Include="node_modules\todomvc-app-css\index.css" />
     <Content Include="node_modules\todomvc-common\base.css" />
@@ -125,9 +126,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\TodoController.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Controllers\ToDoController.cs" />
     <Compile Include="Models\Todo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

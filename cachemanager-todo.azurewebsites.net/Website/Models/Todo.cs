@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace Website.Models
 {
+    [Serializable]
     [JsonObject]
     public class Todo
     {

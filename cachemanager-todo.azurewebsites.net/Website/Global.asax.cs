@@ -17,9 +17,16 @@ namespace Website
             var container = new UnityContainer();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
 
-            var cache = CacheFactory.Build<Todo[]>("todos", settings =>
+            var cache = CacheFactory.Build("todos", settings =>
             {
-                settings.WithSystemRuntimeCacheHandle("inprocess");
+                settings
+                    .WithSystemRuntimeCacheHandle("inprocess")
+                    //.And
+                    //.WithRedisConfiguration("redisLocal", "localhost:6379,ssl=false")
+                    //.WithRedisBackPlate("redisLocal")
+                    //.WithRedisCacheHandle("redisLocal", true)
+                    ;
+                
             });
 
             container.RegisterInstance(cache);
