@@ -284,8 +284,7 @@ protected ICacheManager&lt;object&gt; todoCache { get; set; }
             .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(10))
         .And
         .WithRedisConfiguration("redisLocal", "localhost:6379,ssl=false")
-        .WithRedisCacheHandle("redisLocal", true)
-            .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(20));
+        .WithRedisCacheHandle("redisLocal", true);
 });
 </code></pre>
 
@@ -304,8 +303,7 @@ protected ICacheManager&lt;object&gt; todoCache { get; set; }
             .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(10))
         .And
         .WithRedisBackPlate("redis.azure.us")
-        .WithRedisCacheHandle("redis.azure.us", true)
-            .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(20));
+        .WithRedisCacheHandle("redis.azure.us", true);
 });
 </code></pre>
 
@@ -332,7 +330,7 @@ protected ICacheManager&lt;object&gt; todoCache { get; set; }
             <li>
                 <a href="#single-page-todo-app-with-cache-manager">Single Page Todo App with Cache Manager</a><ul>
                     <li><a href="#basic-functionality">Basic Functionality</a></li>
-                    <li><a href="#rest-service">Rest Service</a></li>
+                    <li><a href="#service-definition">Service Definition</a></li>
                     <li><a href="#project-setup">Project setup</a></li>
                     <li><a href="#model">Model</a></li>
                     <li><a href="#setting-up-cache-manager">Setting up Cache Manager</a></li>
