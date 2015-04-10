@@ -21,11 +21,11 @@ namespace Website
             {
                 settings
                     .WithSystemRuntimeCacheHandle("inprocess")
-                        .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(10))
-                    .And
-                    .WithRedisBackPlate("redis")
-                    .WithRedisCacheHandle("redis", true)
-                        .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(20));
+                        .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(10));
+                    //.And
+                    //.WithRedisBackPlate("redis")
+                    //.WithRedisCacheHandle("redis", true)
+                    //    .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(20));
             });
 
             container.RegisterInstance(cache);

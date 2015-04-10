@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using CacheManager.Core;
 using Microsoft.Practices.Unity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Website.Controllers;
-using System.Diagnostics;
 
 namespace Website.Test
 {
@@ -28,7 +28,6 @@ namespace Website.Test
                     .WithRedisConfiguration("redisLocal", "localhost:6379,ssl=false,allowAdmin=true")
                     .WithRedisBackPlate("redisLocal")
                     .WithRedisCacheHandle("redisLocal", true);
-
             });
 
             container.RegisterInstance(cache);
