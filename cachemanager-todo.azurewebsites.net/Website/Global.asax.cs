@@ -12,9 +12,9 @@ namespace Website
     {
         protected void Application_Start()
         {
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-
             var container = new UnityContainer();
+         
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
 
             var cache = CacheFactory.Build("todos", settings =>
