@@ -16,15 +16,15 @@ namespace Website.Controllers
         [Dependency]
         protected ICacheManager<object> todoCache { get; set; }
 
-        private List<long> AllKeys
+        private List<int> AllKeys
         {
             get
             {
-                var keys = todoCache.Get<long[]>(KeysKey);
+                var keys = todoCache.Get<int[]>(KeysKey);
 
                 if (keys == null)
                 {
-                    keys = new long[] { };
+                    keys = new int[] { };
                     todoCache.Add(KeysKey, keys);
                 }
 
@@ -39,12 +39,12 @@ namespace Website.Controllers
 
             foreach (var key in keys)
             {
-                yield return todoCache.Get<Todo>(TodoKeyPrefix + key);
+                yield return this.Get(key);
             }
         }
 
         // GET: api/ToDo/5
-        public Todo Get(long id)
+        public Todo Get(int id)
         {
             return todoCache.Get<Todo>(TodoKeyPrefix + id);
         }
@@ -52,21 +52,14 @@ namespace Website.Controllers
         // POST: api/ToDo
         public Todo Post([FromBody]Todo value)
         {
-            var allKeys = this.AllKeys;
-
-            long newId = -1;
+            int newId = -1;
             todoCache.Update(KeysKey, obj =>
             {
-                var keys = (obj as long[]).ToList();
+                var keys = (obj as int[]).ToList();
                 newId = !keys.Any() ? 1 : keys.Max() + 1;
                 keys.Add(newId);
                 return keys.ToArray();
             });
-
-            if (newId == -1)
-            {
-                throw new InvalidOperationException("couldn't update keys");
-            }
 
             value.Id = newId;
             todoCache.Add(TodoKeyPrefix + newId, value);
@@ -74,7 +67,7 @@ namespace Website.Controllers
         }
 
         // PUT: api/ToDo/5
-        public void Put(long id, [FromBody]Todo value)
+        public void Put(int id, [FromBody]Todo value)
         {
             todoCache.Put(TodoKeyPrefix + id, value);
         }
@@ -95,12 +88,12 @@ namespace Website.Controllers
         }
 
         // DELETE: api/ToDo/5
-        public void Delete(long id)
+        public void Delete(int id)
         {
             todoCache.Remove(TodoKeyPrefix + id);
             todoCache.Update(KeysKey, obj =>
             {
-                var keys = (obj as long[]).ToList();
+                var keys = (obj as int[]).ToList();
                 keys.Remove(id);
                 return keys.ToArray();
             });

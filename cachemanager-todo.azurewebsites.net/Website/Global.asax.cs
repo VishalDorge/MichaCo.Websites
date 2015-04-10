@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Web.Http;
 using CacheManager.Core;
+using CacheManager.Core.Configuration;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.WebApi;
-using Website.Models;
 
 namespace Website
 {
@@ -21,12 +21,12 @@ namespace Website
             {
                 settings
                     .WithSystemRuntimeCacheHandle("inprocess")
+                    .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(10))
                     //.And
                     //.WithRedisConfiguration("redisLocal", "localhost:6379,ssl=false")
                     //.WithRedisBackPlate("redisLocal")
                     //.WithRedisCacheHandle("redisLocal", true)
                     ;
-                
             });
 
             container.RegisterInstance(cache);

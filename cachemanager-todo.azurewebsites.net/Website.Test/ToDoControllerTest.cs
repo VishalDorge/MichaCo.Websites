@@ -45,6 +45,8 @@ namespace Website.Test
 
             cache.Clear();
 
+            Assert.IsTrue(controller.Get().Any() == false);
+
             var random = new Random();
 
             Run(() =>
@@ -57,7 +59,7 @@ namespace Website.Test
             }, threads, iterations);
 
             var items = controller.Get().ToArray();
-            var allKeys = cache.Get<long[]>("todo-sample-keys");
+            var allKeys = cache.Get<int[]>("todo-sample-keys");
             var uniqueKeys = allKeys.Distinct().ToArray();
 
             Assert.IsTrue(items.Length == threads * iterations, "should be threads * iterations");
