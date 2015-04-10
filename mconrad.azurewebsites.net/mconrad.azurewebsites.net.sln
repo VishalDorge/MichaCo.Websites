@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mconrad.azurewebsites.net", "mconrad.azurewebsites.net\mconrad.azurewebsites.net.csproj", "{6F5ADD01-3E12-42A2-AC31-9747A64C433E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "website\Website.csproj", "{6F5ADD01-3E12-42A2-AC31-9747A64C433E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
