@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Articles\cachemanager_architecture.html" />
+    <Content Include="Articles\cachemanager_backed_todo_web_app.html" />
     <Content Include="Articles\cachemanager_getting_started.html" />
     <Content Include="Articles\cachemanager_readme.html" />
     <Content Include="Articles\cachemanager_synchronization.html" />

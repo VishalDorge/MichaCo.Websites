@@ -305,7 +305,7 @@ svg{
 }
 /* TOC nav */
 #tocNav ul.nav.affix{
-    top: 80px;
+    top: 100px;
 }
 
 #tocNav .nav > li > a:active, #tocNav .nav > li > a:focus,
