@@ -6,7 +6,7 @@
 </p>
 
 <p>
-    To implement the site, I will use an existing AngularJS based <a href="https://github.com/tastejs/todomvc/tree/gh-pages/examples/angularjs">examples</a> from <a href="http://todomvc.com/">todomvc.com</a>.  <br>
+    To implement the site, I will use an existing AngularJS based <a href="https://github.com/tastejs/todomvc/tree/gh-pages/examples/angularjs">example</a> from <a href="http://todomvc.com/">todomvc.com</a>.  <br>
     All credits for this part of this sample site goes to them of course.
 </p>
 
@@ -16,17 +16,13 @@
 
 <p><img src="https://github.com/MichaCo/CacheManager/raw/master/Articles/media/cachemanager-single-page-todo-app/todo-app.jpg" alt="todomvc example" title=""></p>
 
-
-
 <h2 id="basic-functionality">Basic Functionality</h2>
 
-<p>With the app the user can add new todos, edit existing ones, delete them and set them to completed state. Also there is a delete all completed function.</p>
+<p>With this simple app the user can add new todos, edit existing ones, delete them and set them to completed state. There is also a delete “all completed” function.</p>
 
+<h2 id="service-definition">Service Definition</h2>
 
-
-<h2 id="rest-service">Rest Service</h2>
-
-<p>The single page application will call a web API service which has to store or remove the todos and therefore has to provide the following methods:</p>
+<p>This single page application will use a web API service to store or remove the todos and which has to provide the following methods:</p>
 
 <ul>
     <li>Get - retrieves all existing todos</li>
@@ -36,8 +32,6 @@
     <li>Delete(id) - removes one todo by id</li>
     <li>Delete - removes all completed todos</li>
 </ul>
-
-
 
 <h2 id="project-setup">Project setup</h2>
 
