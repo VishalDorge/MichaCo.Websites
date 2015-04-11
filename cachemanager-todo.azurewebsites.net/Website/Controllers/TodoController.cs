@@ -44,7 +44,11 @@ namespace Website.Controllers
 
             foreach (var key in keys)
             {
-                yield return this.Get(key);
+                var value = this.Get(key);
+                if (value != null)
+                {
+                    yield return value;
+                }
             }
         }
 
