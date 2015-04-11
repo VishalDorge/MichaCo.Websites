@@ -25,4 +25,8 @@
     <loc>http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_synchronization</loc>
     <changefreq>weekly</changefreq>
   </url>
+  <url>
+    <loc>http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_backed_todo_web_app</loc>
+    <changefreq>weekly</changefreq>
+  </url>
 </urlset>
