@@ -13,6 +13,39 @@ footer{
     color: #450F0F;
 }
 
+blockquote{
+    font-size:14px;
+    border-left-width: 10px;
+    background-color: rgba(128,128,128,0.05);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+h1, .h1{
+    font-size: 24px;
+}
+h2, .h2{
+    font-size: 20px;
+}
+h3, .h3{
+    font-size: 18px;
+}
+h4, .h4 {
+    font-size: 16px;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 20px; 
+    margin-bottom: 10px; 
+}
+
+code {
+    white-space: pre-wrap;
+    padding: 1px 5px;
+    color:#333;
+    font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
+    background-color: #eee;
+}
+
 .site-content{
     background-color:#fff;
     margin-top:20px;
@@ -181,6 +214,19 @@ footer{
         width:290px;
         height:290px;
     }
+    
+    h1, .h1{
+        font-size: 28px;
+    }
+    h2, .h2{
+        font-size: 22px;
+    }
+    h3, .h3{
+        font-size: 18px;
+    }
+    h4, .h4 {
+        font-size: 16px;
+    }
 }
 @media (min-width: 1200px) {
     .tile{
@@ -224,6 +270,19 @@ footer{
         font-size: 3.5em;
         line-height: 1.4em;
     }
+    
+    h1, .h1{
+        font-size: 30px;
+    }
+    h2, .h2{
+        font-size: 24px;
+    }
+    h3, .h3{
+        font-size: 20px;
+    }
+    h4, .h4 {
+        font-size: 18px;
+    }
 }
 
 /* layout for documentation */
@@ -254,55 +313,6 @@ footer{
     background-color: #212a2b;
 }
 
-blockquote{
-    font-size:14px;
-    border-left-width: 10px;
-    background-color: rgba(128,128,128,0.05);
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-
-h1, .h1{
-    font-size: 30px;
-}
-h2, .h2{
-    font-size: 24px;
-}
-h3, .h3{
-    font-size: 20px;
-}
-h4, .h4 {
-    font-size: 18px;
-}
-h1, .h1, h2, .h2, h3, .h3 {
-    margin-top: 20px; 
-    margin-bottom: 10px; 
-}
-
-code {
-    white-space: pre-wrap;
-    padding: 1px 5px;
-    color:#333;
-    font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
-    background-color: #eee;
-}
-
-svg{
-    box-sizing: border-box;
-    color: rgb(63, 63, 63);
-    display: inline;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    font-size: 18px;
-    left: -0.5px;
-    line-height: 26.1000003814697px;
-    outline-color: rgb(63, 63, 63);
-    outline-style: none;
-    outline-width: 0px;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    position: relative;
-    text-align: center;
-}
 /* TOC nav */
 #tocNav ul.nav.affix{
     top: 100px;
