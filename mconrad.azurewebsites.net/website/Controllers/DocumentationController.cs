@@ -9,7 +9,7 @@ namespace mconrad.azurewebsites.net.Controllers
     {
         public ActionResult Index(string id = "cachemanager_getting_started")
         {
-            ViewBag.Title =
+            ViewBag.Title = "Documentation: " + 
                 string.Join(" ",
                     id
                     .Replace("cachemanager", "Cache Manager")
