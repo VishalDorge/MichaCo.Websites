@@ -22,26 +22,6 @@
                     </div>
                 </div>
             </div>
-            @* <!--testing only -->
-                <div class="col-sm-6 col-xs-12 tile-col">
-                    <div class="tile-1-1 tile tile-darkgray">s</div>
-                    <div class="tile-2-1 tile tile-magenta">d</div>
-                    <div class="tile-1-1 tile tile-red">a</div>
-                    <div class="tile-1-1 tile tile-darkgray">v</div>
-                    <div class="tile-2-1 tile tile-magenta">
-                        <h1>h1h1h1</h1>
-                        <p>ppp</p>
-                    </div>
-                    <div class="tile-1-1 tile tile-red"></div>
-                    <div class="tile-2-2 tile tile-darkgray">
-                        <h1>h1h1h1</h1>
-                        <p>ppp</p>
-                    </div>
-                    <div class="tile-1-1 tile tile-magenta"></div>
-                    <div class="tile-1-1 tile tile-red"></div>
-                    <div class="tile-1-1 tile tile-magenta"></div>
-                    <div class="tile-1-1 tile tile-red"></div>
-                </div>*@
         </div>
 
     </div>
@@ -87,6 +67,12 @@
                     <div class="tile-2-1 tile tile-green">
                         <i class="fa fa-rocket"></i>
                         <span>Getting Started</span>
+                    </div>
+                </a>
+                <a href="@Url.Action("Index", "Documentation", new { Id = "cachemanager_configuration" })" title="Configuration">
+                    <div class="tile-2-1 tile tile-skype">
+                        <i class="fa fa-cogs"></i>
+                        <span>Configuration</span>
                     </div>
                 </a>
                 <a href="@Url.Action("Index", "Documentation", new { Id = "cachemanager_synchronization" })" title="Cache Synchronization">
