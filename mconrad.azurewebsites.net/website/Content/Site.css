@@ -39,8 +39,9 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 code {
+    font-size: 15px;
     white-space: pre-wrap;
-    padding: 1px 5px;
+    padding: 1px 2px;
     color:#333;
     font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
     background-color: #eee;

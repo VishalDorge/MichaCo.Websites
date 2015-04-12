@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Welcome to Michael Conrad's development website";
+    ViewBag.Title = "Welcome to Michael's development website";
 }
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-12">
@@ -11,31 +11,37 @@
                         <h1>
                             Hi, I'm Michael <br />and I'm a developer!<br />
                         </h1>
-                        On this page you might find updates and a list of open source projects I'm interested in or working on...<br />
-                        My focus is on C#, JavaScript/TypeScript and in general anything interesting and web related.
+                        <p>
+                            On this site you will find updates and documentation for my open source projects,
+                            <br />
+                            Blog posts and articles.
+                        </p>
+                        <p>
+                            All the code and samples are hosted on <a href="https://github.com/MichaCo">my Github repositories</a>, my focus is on .Net development, caching, mapping, websites, ASP.NET and JavaScript/Typescript.
+                        </p>
                     </div>
                 </div>
             </div>
             @* <!--testing only -->
-            <div class="col-sm-6 col-xs-12 tile-col">
-                <div class="tile-1-1 tile tile-darkgray">s</div>
-                <div class="tile-2-1 tile tile-magenta">d</div>
-                <div class="tile-1-1 tile tile-red">a</div>
-                <div class="tile-1-1 tile tile-darkgray">v</div>
-                <div class="tile-2-1 tile tile-magenta">
-                    <h1>h1h1h1</h1>
-                    <p>ppp</p>
-                </div>
-                <div class="tile-1-1 tile tile-red"></div>
-                <div class="tile-2-2 tile tile-darkgray">
-                    <h1>h1h1h1</h1>
-                    <p>ppp</p>
-                </div>
-                <div class="tile-1-1 tile tile-magenta"></div>
-                <div class="tile-1-1 tile tile-red"></div>
-                <div class="tile-1-1 tile tile-magenta"></div>
-                <div class="tile-1-1 tile tile-red"></div>
-            </div>*@
+                <div class="col-sm-6 col-xs-12 tile-col">
+                    <div class="tile-1-1 tile tile-darkgray">s</div>
+                    <div class="tile-2-1 tile tile-magenta">d</div>
+                    <div class="tile-1-1 tile tile-red">a</div>
+                    <div class="tile-1-1 tile tile-darkgray">v</div>
+                    <div class="tile-2-1 tile tile-magenta">
+                        <h1>h1h1h1</h1>
+                        <p>ppp</p>
+                    </div>
+                    <div class="tile-1-1 tile tile-red"></div>
+                    <div class="tile-2-2 tile tile-darkgray">
+                        <h1>h1h1h1</h1>
+                        <p>ppp</p>
+                    </div>
+                    <div class="tile-1-1 tile tile-magenta"></div>
+                    <div class="tile-1-1 tile tile-red"></div>
+                    <div class="tile-1-1 tile tile-magenta"></div>
+                    <div class="tile-1-1 tile tile-red"></div>
+                </div>*@
         </div>
 
     </div>
@@ -43,16 +49,16 @@
         <div class="tile-title">Projects</div>
         <div class="row">
             <div class="col-sm-6 col-xs-12 tile-col">
-                <div class="tile-4-4 tile tile-purple2">                    
+                <div class="tile-4-4 tile tile-purple2">
                     <div>
                         <h1>
                             CacheManager
                         </h1>
                         <div>
-                            @Common.CacheManagerDescription @Common.CacheManagerDescriptionOpenSource @Common.CacheManagerDescriptionAdvanced
+                            @Common.CacheManagerDescription
                             <hr />
-                            The CacheManager source code can be <a href="https://github.com/MichaCo/CacheManager">found on github</a>.
-                            <br />For documentation, use the CacheManager menu.
+                            The CacheManager source code can be found <a href="https://github.com/MichaCo/CacheManager">on Github</a>.
+                            <br />For documentation, you can use the menu or the tiles below.
                         </div>
                     </div>
                 </div>
@@ -64,23 +70,11 @@
                         <span>Readme</span>
                     </div>
                 </a>
-                
+
                 <a href="@Url.Action("Index", "Documentation", new { Id = "cachemanager_architecture" })" title="Features and Architecture">
                     <div class="tile-1-1 tile tile-purple">
                         <i class="fa fa-code"></i>
-                        <span>Architecture</span>
-                    </div>
-                </a>
-                <a href="@Url.Action("Index", "Documentation", new { Id = "cachemanager_synchronization" })" title="Cache Synchronization">
-                    <div class="tile-1-1 tile tile-red">
-                        <i class="fa fa-refresh"></i>
-                        <span>Synch</span>
-                    </div>
-                </a>
-                <a href="@Url.Action("Index", "Documentation", new { Id = "cachemanager_getting_started" })" title="Getting started">
-                    <div class="tile-2-2 tile tile-green">
-                        <i class="fa fa-rocket"></i>
-                        <span>Getting Started</span>
+                        <span>Features</span>
                     </div>
                 </a>
                 <a href="@Url.Action("Index", "Documentation", new { Id = "cachemanager_update" })" title="Update operations">
@@ -89,17 +83,30 @@
                         <span>Update</span>
                     </div>
                 </a>
+                <a href="@Url.Action("Index", "Documentation", new { Id = "cachemanager_getting_started" })" title="Getting started">
+                    <div class="tile-2-1 tile tile-green">
+                        <i class="fa fa-rocket"></i>
+                        <span>Getting Started</span>
+                    </div>
+                </a>
+                <a href="@Url.Action("Index", "Documentation", new { Id = "cachemanager_synchronization" })" title="Cache Synchronization">
+                    <div class="tile-2-1 tile tile-red">
+                        <i class="fa fa-refresh"></i>
+                        <span>Cache Synchronization</span>
+                    </div>
+                </a>
                 <a href="http://michaco.github.io/Documentation/CacheManager/Help" title="Generated API Html Help">
                     <div class="tile-1-1 tile tile-darkgray">
                         <i class="fa fa-question-circle"></i>
                         <span>Html Help</span>
                     </div>
-                </a>              
+                </a>
+                <div class="tile-1-1 tile"></div>
                 <a href="@Url.Action("Index", "Documentation", new { Id = "cachemanager_backed_todo_web_app" })" title="Todo web app sample">
                     <div class="tile-2-2 tile tile-blue">
                         <div>
                             <h3>Todo Sample</h3>
-                            A single page To-Do web app.
+                            Writing a single page To-Do web app.
                         </div>
                     </div>
                 </a>

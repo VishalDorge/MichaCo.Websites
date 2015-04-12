@@ -11,7 +11,7 @@ namespace mconrad.azurewebsites.net
         {
             get
             {
-                return "CacheManager is a common interface and abstraction layer for caching for .Net written in C#.";
+                return "CacheManager is an open source abstraction layer for caching written in C# for .Net. available via Nuget";
             }
         }
 
@@ -19,23 +19,7 @@ namespace mconrad.azurewebsites.net
         {
             get
             {
-                return "CacheManager is a common interface and abstraction layer for caching written in C#.";
-            }
-        }
-
-        public static string CacheManagerDescriptionOpenSource
-        {
-            get
-            {
-                return "It is open source and available via Nuget.";
-            }
-        }
-
-        public static string CacheManagerDescriptionAdvanced
-        {
-            get
-            {
-                return "It supports various cache providers and implements many advanced features.";
+                return "CacheManager is an open source abstraction layer for caching written in C# and is available via Nuget. It supports various cache providers and implements many advanced features.";
             }
         }
     }
