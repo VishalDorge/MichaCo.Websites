@@ -58,6 +58,8 @@ cache.Add("key", "value");
 <pre><code>var cache = CacheFactory.FromConfiguration&lt;int&gt;("numbers", cfg);
 </code></pre>
 
+
+
 <h3 id="configuration-section">Configuration Section</h3>
 
 <p>The Cache Manager configuration section has two main parts, the <code>managers</code>  collection which is used to configure the cache manager instances. The <code>name</code> of the element within the collection can be passed to <code>CacheFactory.FromConfiguration</code>.</p>
@@ -83,7 +85,7 @@ cache.Add("key", "value");
 	<p>
 		<strong>Hint</strong> <br>
 		To make configuration via .config file easier, enable intellisense by adding the <code>xmlns</code> attribute to he <code>cacheManagers</code> section and add the CacheManagerCfg.xsd file to your solution. The xsd file can be found in  [solution dir]/packages/CacheManager.Core.x.x.x.x/CacheManagerCfg.xsd <br>
-		See also [this answer on stackoverflow][stackoverflow-config-xsd]
+		See also <a href="http://stackoverflow.com/questions/742905/enabling-intellisense-for-custom-sections-in-config-files">this answer on stackoverflow</a>
 	</p>
 </blockquote>
 
