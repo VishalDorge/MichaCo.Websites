@@ -3,95 +3,99 @@
 <p>CacheManager is an open source abstraction layer for caching written in C#. It supports various cache providers and implements many advanced features.</p>
 
 <p>
-    The main goal of the CacheManager package is to make developer’s life easier to handle even very complex caching scenarios. <br>
-    With CacheManager it is possible to implement multiple layers of caching, e.g. in-process caching in front of a distributed cache, in just a few lines of code.
+	The main goal of the CacheManager package is to make developer’s life easier to handle even very complex caching scenarios. <br>
+	With CacheManager it is possible to implement multiple layers of caching, e.g. in-process caching in front of a distributed cache, in just a few lines of code.
 </p>
 
 <p>
-    CacheManager is not just an interface to unify the programming model for various cache providers, which will  <br>
-    make it very easy to change the caching strategy later on in a project. It also offers additional features, like cache synchronization, concurrent updates, events, performance counters…  <br>
-    The developer can opt-in to those features only if needed.
+	CacheManager is not just an interface to unify the programming model for various cache providers, which will  <br>
+	make it very easy to change the caching strategy later on in a project. It also offers additional features, like cache synchronization, concurrent updates, events, performance counters…  <br>
+	The developer can opt-in to those features only if needed.
 </p>
+
+
 
 <h2 id="documentation">Documentation</h2>
 
 <p>Documentation can be found within the <a href="https://github.com/MichaCo/CacheManager/tree/master/Articles">articles folder</a> of the Cache Manager’s repository and  hosted on my <a href="http://mconrad.azurewebsites.net">website</a>:</p>
 
 <ul>
-    <li>
-        <a href="http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_getting_started"><strong>Getting Started</strong></a> <br>
-        Is a very basic introduction of how to install and use Cache Manager
-    </li>
-    <li>
-        <a href="http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_architecture"><strong>Features and Architecture</strong></a> <br>
-        A more advanced in depth introduction to all features of Cache Manager
-    </li>
-    <li>
-        <a href="http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_update"><strong>Update Operations</strong></a> <br>
-        Explanation of why and when to use the update method instead of <code>Put</code>
-    </li>
-    <li>
-        <a href="http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_synchronization"><strong>Cache Synchronization</strong></a> <br>
-        Use case for and explanation of the Cache Back Plate feature.
-    </li>
+	<li>
+		<a href="http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_getting_started"><strong>Getting Started</strong></a> <br>
+		Is a very basic introduction of how to install and use Cache Manager
+	</li>
+	<li>
+		<a href="http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_configuration"><strong>Configuration</strong></a> <br>
+		Explains how to configure Cache Manager via code or configuration file
+	</li>
+	<li>
+		<a href="http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_architecture"><strong>Features and Architecture</strong></a> <br>
+		A more advanced in depth introduction to all features of Cache Manager
+	</li>
+	<li>
+		<a href="http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_update"><strong>Update Operations</strong></a> <br>
+		Explanation of why and when to use the update method instead of <code>Put</code>
+	</li>
+	<li>
+		<a href="http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_synchronization"><strong>Cache Synchronization</strong></a> <br>
+		Use case for and explanation of the Cache Back Plate feature.
+	</li>
 </ul>
 
 <p>There is also from source generated <a href="http://michaco.github.io/Documentation/CacheManager/Help">html documentation</a> available online.</p>
 
-
-
 <h2 id="cachemanager-nuget-packages">CacheManager Nuget Packages</h2>
 
 <table>
-    <thead>
-        <tr>
-            <th>Package Name</th>
-            <th align="center">.Net 4.0</th>
-            <th align="center">.Net 4.5</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><a href="https://www.nuget.org/packages/CacheManager.Core">CacheManager.Core</a></td>
-            <td align="center">x</td>
-            <td align="center">x</td>
-        </tr>
-        <tr>
-            <td><a href="https://www.nuget.org/packages/CacheManager.StackExchange.Redis">CacheManager.StackExchange.Redis</a></td>
-            <td align="center">x</td>
-            <td align="center">x</td>
-        </tr>
-        <tr>
-            <td><a href="https://www.nuget.org/packages/CacheManager.SystemRuntimeCaching">CacheManager.SystemRuntimeCaching</a></td>
-            <td align="center">x</td>
-            <td align="center">x</td>
-        </tr>
-        <tr>
-            <td><a href="https://www.nuget.org/packages/CacheManager.AppFabricCache">CacheManager.AppFabricCache</a></td>
-            <td align="center">-</td>
-            <td align="center">x</td>
-        </tr>
-        <tr>
-            <td><a href="https://www.nuget.org/packages/CacheManager.WindowsAzureCaching">CacheManager.WindowsAzureCaching</a></td>
-            <td align="center">-</td>
-            <td align="center">x</td>
-        </tr>
-        <tr>
-            <td><a href="https://www.nuget.org/packages/CacheManager.Memcached">CacheManager.Memcached</a></td>
-            <td align="center">x</td>
-            <td align="center">x</td>
-        </tr>
-        <tr>
-            <td><a href="https://www.nuget.org/packages/CacheManager.Web">CacheManager.Web</a></td>
-            <td align="center">-</td>
-            <td align="center">x</td>
-        </tr>
-        <tr>
-            <td><a href="https://www.nuget.org/packages/CacheManager.Couchbase">CacheManager.Couchbase</a></td>
-            <td align="center">-</td>
-            <td align="center">x</td>
-        </tr>
-    </tbody>
+	<thead>
+		<tr>
+			<th>Package Name</th>
+			<th align="center">.Net 4.0</th>
+			<th align="center">.Net 4.5</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><a href="https://www.nuget.org/packages/CacheManager.Core">CacheManager.Core</a></td>
+			<td align="center">x</td>
+			<td align="center">x</td>
+		</tr>
+		<tr>
+			<td><a href="https://www.nuget.org/packages/CacheManager.StackExchange.Redis">CacheManager.StackExchange.Redis</a></td>
+			<td align="center">x</td>
+			<td align="center">x</td>
+		</tr>
+		<tr>
+			<td><a href="https://www.nuget.org/packages/CacheManager.SystemRuntimeCaching">CacheManager.SystemRuntimeCaching</a></td>
+			<td align="center">x</td>
+			<td align="center">x</td>
+		</tr>
+		<tr>
+			<td><a href="https://www.nuget.org/packages/CacheManager.AppFabricCache">CacheManager.AppFabricCache</a></td>
+			<td align="center">-</td>
+			<td align="center">x</td>
+		</tr>
+		<tr>
+			<td><a href="https://www.nuget.org/packages/CacheManager.WindowsAzureCaching">CacheManager.WindowsAzureCaching</a></td>
+			<td align="center">-</td>
+			<td align="center">x</td>
+		</tr>
+		<tr>
+			<td><a href="https://www.nuget.org/packages/CacheManager.Memcached">CacheManager.Memcached</a></td>
+			<td align="center">x</td>
+			<td align="center">x</td>
+		</tr>
+		<tr>
+			<td><a href="https://www.nuget.org/packages/CacheManager.Web">CacheManager.Web</a></td>
+			<td align="center">-</td>
+			<td align="center">x</td>
+		</tr>
+		<tr>
+			<td><a href="https://www.nuget.org/packages/CacheManager.Couchbase">CacheManager.Couchbase</a></td>
+			<td align="center">-</td>
+			<td align="center">x</td>
+		</tr>
+	</tbody>
 </table>
 
 
@@ -100,80 +104,80 @@
 <h2 id="features-in-version-044">Features in Version: <a href="https://github.com/MichaCo/CacheManager/releases">0.4.4</a> <a href="https://travis-ci.org/MichaCo/CacheManager"><img src="https://travis-ci.org/MichaCo/CacheManager.svg?branch=master" alt="Build Status" title=""></a></h2>
 
 <ul>
-    <li>One common interface for handling different caching technologies: <code>ICache&lt;T&gt;</code></li>
-    <li>Configurable via app/web.config or by code.</li>
-    <li>
-        Support for different cache providers <br>
-        <ul>
-            <li><strong>MemoryCache</strong> (System.Runtime.Caching)</li>
-            <li><strong>Redis</strong> using <a href="https://github.com/StackExchange/StackExchange.Redis">StackExchange.Redis</a></li>
-            <li><strong>Memcached</strong> using <a href="https://github.com/enyim/EnyimMemcached">Enyim.Memcached</a></li>
-            <li><strong>Couchbase</strong> using <a href="https://github.com/couchbase/couchbase-net-client">Couchbase.Net.Client v2</a></li>
-            <li>AppFabric cache (might get descoped)</li>
-            <li>Azure cache (might get descoped)</li>
-        </ul>
-    </li>
-    <li>
-        <strong>Update values with lock or transaction</strong> for distributed caches.  <br>
-        The interfaced provides a simple update method which internally ensures you work with the latest version. <br>
-        And CacheManager handles version conflicts for you.
-    </li>
-    <li><strong>Strongly typed</strong> cache interface.</li>
-    <li>
-        <strong>Multiple layers</strong> <br>
-        By having multiple cache handles managed by CacheManager, you can easily implement layered caches. For example an in process cache infront of your distributed cache, to make read access faster. <br>
-        CacheManager will synchronize those layers for you.  <br>
-        <ul>
-            <li><code>Put</code> and <code>Add</code> operations will always be excecuted on all cache handles registered on the manager.</li>
-            <li>
-                On <code>Get</code>, there are different configuration options defined by <code>CacheUpdateMode</code>, if the item was available in one cache handle: <br>
-                <ul>
-                    <li>None: No update across the cache handles on Get</li>
-                    <li>Up: Updates the handles “above”</li>
-                    <li>All: Updates/Adds the item to all handles</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <strong>Expiration</strong>: It is possible to configure the expiration per cache handle within the manager or per cache item. <br>
-        The following are the supported expiration modes: <br>
-        <ul>
-            <li>Sliding expiration: On cache hit, the cache item expiration timeout will be extended by the configured amount.</li>
-            <li>Absolute expiration: The cache item will expire after the configured timeout.</li>
-        </ul>
-    </li>
-    <li>
-        <strong>Cache Regions</strong>: Even if some cache systems do not support or implement cache regions, the CacheManager implements the mechanism. <br>
-        This can be used to for example group elements and remove all of them at once.
-    </li>
-    <li><strong>Statistics</strong>: Counters for all kind of cache actions.</li>
-    <li><strong>Performance Counters</strong>: To be able to inspect certain numbers with perfmon, CacheManager supports performance counters per instance of the manager and per cache handle.</li>
-    <li>
-        <strong>Event System</strong>: CacheManager triggers events for common cache actions: <br>
-        OnGet, OnAdd, OnPut, OnRemove, OnClear, OnClearRegion
-    </li>
-    <li><strong>System.Web.OutputCache</strong> implementation to use CacheManager as OutputCache provider which makes the OutputCache extremly flexible, for example by using a distributed cache like Redis across many web servers.</li>
-    <li>
-        <strong>Cache clients synchronization</strong>  <br>
-        <ul>
-            <li>Implemented with the Redis pub/sub feature</li>
-            <li>(Other implementations without Redis might be an option for a later version)</li>
-        </ul>
-    </li>
-    <li>Supports .Net 4.0, .Net 4.5</li>
+	<li>One common interface for handling different caching technologies: <code>ICache&lt;T&gt;</code></li>
+	<li>Configurable via app/web.config or by code.</li>
+	<li>
+		Support for different cache providers <br>
+		<ul>
+			<li><strong>MemoryCache</strong> (System.Runtime.Caching)</li>
+			<li><strong>Redis</strong> using <a href="https://github.com/StackExchange/StackExchange.Redis">StackExchange.Redis</a></li>
+			<li><strong>Memcached</strong> using <a href="https://github.com/enyim/EnyimMemcached">Enyim.Memcached</a></li>
+			<li><strong>Couchbase</strong> using <a href="https://github.com/couchbase/couchbase-net-client">Couchbase.Net.Client v2</a></li>
+			<li>AppFabric cache (might get descoped)</li>
+			<li>Azure cache (might get descoped)</li>
+		</ul>
+	</li>
+	<li>
+		<strong>Update values with lock or transaction</strong> for distributed caches.  <br>
+		The interfaced provides a simple update method which internally ensures you work with the latest version. <br>
+		And CacheManager handles version conflicts for you.
+	</li>
+	<li><strong>Strongly typed</strong> cache interface.</li>
+	<li>
+		<strong>Multiple layers</strong> <br>
+		By having multiple cache handles managed by CacheManager, you can easily implement layered caches. For example an in process cache infront of your distributed cache, to make read access faster. <br>
+		CacheManager will synchronize those layers for you.  <br>
+		<ul>
+			<li><code>Put</code> and <code>Add</code> operations will always be excecuted on all cache handles registered on the manager.</li>
+			<li>
+				On <code>Get</code>, there are different configuration options defined by <code>CacheUpdateMode</code>, if the item was available in one cache handle: <br>
+				<ul>
+					<li>None: No update across the cache handles on Get</li>
+					<li>Up: Updates the handles “above”</li>
+					<li>All: Updates/Adds the item to all handles</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<strong>Expiration</strong>: It is possible to configure the expiration per cache handle within the manager or per cache item. <br>
+		The following are the supported expiration modes: <br>
+		<ul>
+			<li>Sliding expiration: On cache hit, the cache item expiration timeout will be extended by the configured amount.</li>
+			<li>Absolute expiration: The cache item will expire after the configured timeout.</li>
+		</ul>
+	</li>
+	<li>
+		<strong>Cache Regions</strong>: Even if some cache systems do not support or implement cache regions, the CacheManager implements the mechanism. <br>
+		This can be used to for example group elements and remove all of them at once.
+	</li>
+	<li><strong>Statistics</strong>: Counters for all kind of cache actions.</li>
+	<li><strong>Performance Counters</strong>: To be able to inspect certain numbers with perfmon, CacheManager supports performance counters per instance of the manager and per cache handle.</li>
+	<li>
+		<strong>Event System</strong>: CacheManager triggers events for common cache actions: <br>
+		OnGet, OnAdd, OnPut, OnRemove, OnClear, OnClearRegion
+	</li>
+	<li><strong>System.Web.OutputCache</strong> implementation to use CacheManager as OutputCache provider which makes the OutputCache extremly flexible, for example by using a distributed cache like Redis across many web servers.</li>
+	<li>
+		<strong>Cache clients synchronization</strong>  <br>
+		<ul>
+			<li>Implemented with the Redis pub/sub feature</li>
+			<li>(Other implementations without Redis might be an option for a later version)</li>
+		</ul>
+	</li>
+	<li>Supports .Net 4.0, .Net 4.5</li>
 </ul>
 
 <p>
-    <div class="toc">
-        <ul>
-            <li>
-                <a href="#cachemanager">CacheManager</a><ul>
-                    <li><a href="#documentation">Documentation</a></li>
-                    <li><a href="#cachemanager-nuget-packages">CacheManager Nuget Packages</a></li>
-                    <li><a href="#features-in-version-044">Features in Version: 0.4.4 </a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+	<div class="toc">
+		<ul>
+			<li>
+				<a href="#cachemanager">CacheManager</a><ul>
+					<li><a href="#documentation">Documentation</a></li>
+					<li><a href="#cachemanager-nuget-packages">CacheManager Nuget Packages</a></li>
+					<li><a href="#features-in-version-044">Features in Version: 0.4.4 </a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
 </p>
