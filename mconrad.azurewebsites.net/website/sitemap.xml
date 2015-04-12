@@ -6,6 +6,10 @@
     <priority>1</priority>
   </url>
   <url>
+    <loc>http://mconrad.azurewebsites.net/CacheManager</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>http://mconrad.azurewebsites.net/Home/CacheManager</loc>
     <changefreq>weekly</changefreq>
   </url>
