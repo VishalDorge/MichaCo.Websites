@@ -1,22 +1,22 @@
 ﻿@{
-    Layout = "~/Views/Shared/_LayoutWithTOC.cshtml";
+	Layout = "~/Views/Shared/_LayoutWithTOC.cshtml";
 }
 
 <div class="row">
-    <div class="col-xs-12 contentHeader">
-        <h1>Cache Manager Documentation</h1>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-via="micha_conrad" data-hashtags="CacheManager" data-dnt="true">Tweet</a>
-        <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
-    </div>
-    <div class="col-xs-12 contentBody">
-        @{
-            var article = ViewBag.DocumentId + ".html";
-            var fileName = Server.MapPath("~/Articles/" + article);
-            if (!File.Exists(fileName))
-            {
-                throw new InvalidOperationException("Article doesn't exist.");
-            }
-        }
-        @Html.Raw(File.ReadAllText(fileName))
-    </div>
+	<div class="col-xs-12 contentHeader">
+		<h1>Cache Manager Documentation</h1>
+		<a href="https://twitter.com/share" class="twitter-share-button" data-via="micha_conrad" data-hashtags="CacheManager" data-dnt="true">Tweet</a>
+		<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+	</div>
+	<div class="col-xs-12 contentBody">
+		@{
+			var article = ViewBag.DocumentId + ".html";
+			var fileName = Server.MapPath("~/Articles/" + article);
+			if (!File.Exists(fileName))
+			{
+				throw new InvalidOperationException("Article doesn't exist.");
+			}
+		}
+		@Html.Raw(File.ReadAllText(fileName))
+	</div>
 </div>
