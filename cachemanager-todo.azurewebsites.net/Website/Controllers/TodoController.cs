@@ -10,13 +10,13 @@ namespace Website.Controllers
 {
     public class ToDoController : ApiController
     {
-        // prefix for the todo cache key. 
-        // This is not really needed, but anyways... maybe better than storing the integer only
+        // prefix for the todo cache key. This is not really needed, but anyways... maybe better
+        // than storing the integer only
         private const string TodoKeyPrefix = "todo-sample-item-";
 
         // key to store all available todos' keys.
         private const string KeysKey = "todo-sample-keys";
-        
+
         // retrieves all todos' keys or adds an empty int array if the key is not set
         private List<int> AllKeys
         {
