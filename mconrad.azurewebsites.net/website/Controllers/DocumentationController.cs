@@ -9,14 +9,32 @@ namespace mconrad.azurewebsites.net.Controllers
     {
         public ActionResult Index(string id = "cachemanager_getting_started")
         {
+            ViewBag.MainTitle = "Cache Manager Documentation";
             ViewBag.Title = "Documentation: " +
                 string.Join(" ",
                     id
                     .Replace("cachemanager", "Cache Manager")
                     .Split('_').Select(p => p.Substring(0, 1).ToUpper() + p.Substring(1)).ToArray());
 
+            return GetDocumentResult(id);
+        }
+
+        public ActionResult Blog(string id)
+        {
+            ViewBag.MainTitle = "Micha's Blog";
+            ViewBag.Title = "Micha's Blog: " +
+                string.Join(" ",
+                    id
+                    .Replace("aspnet", "ASP.NET")
+                    .Split('_').Select(p => p.Substring(0, 1).ToUpper() + p.Substring(1)).ToArray());
+
+            return GetDocumentResult(id);
+        }
+
+        private ActionResult GetDocumentResult(string id)
+        {
             ViewBag.DocumentId = id;
-            return View();
+            return View("Index");
         }
     }
 }

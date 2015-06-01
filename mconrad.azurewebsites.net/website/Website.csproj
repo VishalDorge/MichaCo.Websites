@@ -198,6 +198,8 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Articles\aspnet_5_accessing_environment_variables.md" />
+    <Content Include="Articles\aspnet_5_accessing_environment_variables.html" />
     <None Include="CacheManagerCfg.xsd">
       <SubType>Designer</SubType>
     </None>

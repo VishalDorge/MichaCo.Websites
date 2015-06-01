@@ -1,0 +1,124 @@
+﻿<h1 id="accessing-environment-variables-in-aspnet-5-apps">Accessing Environment Variables in ASP.NET 5 Apps</h1>
+
+<p>This is a quick walk-through of how to access environmental variables when writing applications using the <a href="https://github.com/aspnet/dnx">ASP.NET 5 DNX</a> execution environment.</p>
+
+<h2 id="use-case-and-history">Use Case and History</h2>
+
+<p>When writing apps, you often need access to variables like the directory your app runs in, or the version of the hosting environment.</p>
+
+<p>In .Net 4.x we used static variables like <code>AppDomain</code> which could cause all kinds of issues depending on where your app is running. With .Net portable libraries this was also not very friendly.</p>
+
+<p>Targeting DNX Core, those constructs are not available anymore but more importantly, we don’t need them anymore. Instead, we use dependency injection to access what we need within our app.</p>
+
+
+
+<h2 id="dependency-injection">Dependency Injection</h2>
+
+<p>The ASP.NET team introduced a lightweight DI framework which <code>DNX</code> can use to inject things into our apps. </p>
+
+<p>The DI framework supports constructor injection only, in case of a console application, you can inject to the constructor of our <code>Program.cs</code>. This is the same for ASP.NET web and console applications. In case of web applications you would inject to the <code>Startup.cs</code> class which is used to bootstrap your web app.</p>
+
+<blockquote>
+	<p>
+		<strong>Note:</strong>  <br>
+		Don’t use a <code>static</code> main method, otherwise you’d have to set static properties from the constructor to access the injected objects, which would be bad
+	</p>
+</blockquote>
+
+<p>Now, the question is, what do we want to inject and how does that work?</p>
+
+<p>
+	The <code>Microsoft.Framework.Runtime.Abstractions</code> NuGet package provides all the interfaces which are available to us.  <br>
+	If you add one of those interfaces to the constructor, at runtime, the host (DNX) will inject the instantiated concrete implementation. The concrete implementation may vary based on where our app is running, could be Windows, Linux or whatever <code>DNX</code> supports.
+</p>
+
+<p>And that is the beauty of dependency injection and the new framework. At development time we don’t have to know, and more importantly, care about the differences. The framework abstracts this away for us and it will just work (hopefully).</p>
+
+
+
+<h2 id="accessing-environment-variables">Accessing Environment Variables</h2>
+
+<p>Now, let’s write some code. We will use Visual Studio 2015 RC (or newer) and the new ASP.NET 5 project template for a console application. This should create a <code>project.json</code> targeting the new <code>DNX 4.5.1</code> and <code>DNX Core 5.0</code> and a simple <code>Program.cs</code></p>
+
+<pre><code>public class Program
+{
+    public void Main(string[] args)
+    {
+    }
+}
+</code></pre>
+
+<p>There are several interfaces which provide you with different environmental information coming from the <code>Microsoft.Framework.Runtime.Abstractions</code> NuGet package:</p>
+
+<ul>
+	<li>
+		<strong><code>IApplicationEnvironment</code></strong> <br>
+		Provides access to common application information
+	</li>
+	<li>
+		<strong><code>IRuntimeEnvironment</code></strong> <br>
+		Provides access to the runtime environment
+	</li>
+	<li>
+		<strong><code>IRuntimeOptions</code></strong> <br>
+		Represents the options passed into the runtime on boot
+	</li>
+</ul>
+
+<p>To use the package in our console app, we have to add the package as dependency to the <code>project.json</code> file:</p>
+
+<pre><code>  "dependencies": {
+    "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta6-*"
+  },
+</code></pre>
+
+<blockquote>
+	<p>
+		<strong>Note:</strong> <br>
+		The version may vary, at the time of writing this article, it was <code>beta6</code>.
+	</p>
+</blockquote>
+
+<p>Now, we add those interfaces as parameters to the constructor of our app. In the following example we use the console output to print some of the information those interfaces provide:</p>
+
+<pre><code>public Program(IApplicationEnvironment app,
+               IRuntimeEnvironment runtime,
+               IRuntimeOptions options)
+{
+    Console.WriteLine("ApplicationName: {0} {1}", app.ApplicationName, app.Version);
+    Console.WriteLine("ApplicationBasePath: {0}", app.ApplicationBasePath);
+    Console.WriteLine("Framework: {0}", app.RuntimeFramework.FullName);
+    Console.WriteLine("Runtime: {0} {1} {2}", runtime.RuntimeType, runtime.RuntimeArchitecture, runtime.RuntimeVersion);
+    Console.WriteLine("System: {0} {1}", runtime.OperatingSystem, runtime.OperatingSystemVersion);
+}
+public void Main(string[] args) { ... }
+</code></pre>
+
+
+
+<h2 id="more-resources-and-examples">More Resources and Examples</h2>
+
+<ul>
+	<li><a href="http://docs.asp.net/en/latest/dnx/overview.html">DNX Overview</a></li>
+	<li><a href="https://github.com/aspnet/Home/wiki/DNX-structure">DNX Wiki</a></li>
+	<li><a href="https://github.com/dotnet/coreclr/issues/919">Interesting discussion around retrieving type information</a></li>
+	<li>
+		<a href="https://github.com/aspnet/Entropy/blob/dev/samples/Runtime.CustomLoader/Program.cs">Custom assembly loader</a> <br>
+		Injecting <code>IAssemblyLoaderContainer</code> and <code>IAssemblyLoadContextAccessor</code>
+	</li>
+</ul>
+
+<p>
+	<div class="toc">
+		<ul>
+			<li>
+				<a href="#accessing-environment-variables-in-aspnet-5-apps">Accessing Environment Variables in ASP.NET 5 Apps</a><ul>
+					<li><a href="#use-case-and-history">Use Case and History</a></li>
+					<li><a href="#dependency-injection">Dependency Injection</a></li>
+					<li><a href="#accessing-environment-variables">Accessing Environment Variables</a></li>
+					<li><a href="#more-resources-and-examples">More Resources and Examples</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</p>
