@@ -2,37 +2,35 @@
 
 This is a quick walk-through of how to access environmental variables when writing applications using the [ASP.NET 5 DNX][1] execution environment.
 
-## Use Case and History
-When writing apps, you often need access to variables like the directory your app runs in, or the version of the hosting environment.
+## Introduction
+When writing web or console applications, you often need to access variables like the directory your app runs in, the version of the hosting environment or environment variables like the `TEMP` folder location or `PATH` and `USERPROFILE` variables.
+We also might want to store security related information, like database passwords or security tokens in a way that it doesn't end up in a configuration file which gets checked into source control.
 
-In .Net 4.x we used static variables like `AppDomain` which could cause all kinds of issues depending on where your app is running. With .Net portable libraries this was also not very friendly.
+In .Net 4.x we used static variables like `AppDomain` or `ConfigurationManager.AppSettings` which could cause all kinds of issues depending on the type and environment your app is running on. With .Net portable libraries this was also not very friendly.
 
-Targeting DNX Core, those constructs are not available anymore but more importantly, we don't need them anymore. Instead, we use dependency injection to access what we need within our app.
+Writing new apps targeting `Core CLR`, those constructs are not available anymore but more importantly, we don't need them anymore. 
+With [**`DNX`**][dnx_overview] the ASP.NET team wrote a great host environment for all kinds of apps, but it also comes with a lot of new concepts.
+For example, there are different ways to access the variables of the environment our app is running in:
+
+* Injecting strongly typed, host related data via dependency injection 
+* Using `string key, string value` pairs via configuration 
 
 ## Dependency Injection
-The ASP.NET team introduced a lightweight DI framework which `DNX` can use to inject things into our apps. 
-
-The DI framework supports constructor injection only, in case of a console application, you can inject to the constructor of our `Program.cs`. This is the same for ASP.NET web and console applications. In case of web applications you would inject to the `Startup.cs` class which is used to bootstrap your web app.
+The ASP.NET team introduced a lightweight DI framework which is also used by `DNX` to inject things into your apps. 
 
 > **Note:** 
-> Don't use a `static` main method, otherwise you'd have to set static properties from the constructor to access the injected objects, which would be bad
+> The build in DI framework supports constructor injection only. It can be replaced by a more heavyweight packages like *Autofaq* or *Ninject*. For this article we will use the build in DI.
 
-Now, the question is, what do we want to inject and how does that work?
+One nice feature of `DNX` is the fact that it can inject useful data to our app's entry point.
+In case of ASP.NET web apps we can inject to the `Startup.cs`'s constructor, for consoles, we use the constructor of our `Program.cs`.
 
-The `Microsoft.Framework.Runtime.Abstractions` NuGet package provides all the interfaces which are available to us. 
-If you add one of those interfaces to the constructor, at runtime, the host (DNX) will inject the instantiated concrete implementation. The concrete implementation may vary based on where our app is running, could be Windows, Linux or whatever `DNX` supports.
+Now, the question is, what do we have to inject and how does that work?
 
-And that is the beauty of dependency injection and the new framework. At development time we don't have to know, and more importantly, care about the differences. The framework abstracts this away for us and it will just work (hopefully).
+The `Microsoft.Framework.Runtime.Abstractions` NuGet package provides all the interfaces which are available to us. If you add one of those interfaces to the constructor, the host (DNX) will inject the instantiated concrete implementation at runtime. 
+The concrete implementation may vary based on which environment our app is running on, e.g. Windows or Linux.
 
-## Accessing Environment Variables
-Now, let's write some code. We will use Visual Studio 2015 RC (or newer) and the new ASP.NET 5 project template for a console application. This should create a `project.json` targeting the new `DNX 4.5.1` and `DNX Core 5.0` and a simple `Program.cs`
-
-    public class Program
-    {
-        public void Main(string[] args)
-        {
-        }
-    }
+And that is the beauty of dependency injection and the new framework. At development time we don't have to know, and more importantly, we don't have to care about the differences. 
+The framework abstracts this away for us and it will just work. And because those interfaces provide us a strongly typed contract, we can expect that those properties are set.
 
 There are several interfaces which provide you with different environmental information coming from the `Microsoft.Framework.Runtime.Abstractions` NuGet package:
 
@@ -43,7 +41,20 @@ Provides access to the runtime environment
 * **`IRuntimeOptions`**
 Represents the options passed into the runtime on boot
 
-To use the package in our console app, we have to add the package as dependency to the `project.json` file:
+> **Hint:** 
+> There are more interfaces like `ICompilerOptions` or `IAssemblyLoader` which can be very useful but will not be discussed here. Play around with them yourself! 
+
+### Example
+To write an ASP.NET 5 console app, use Visual Studio 2015 (RC or newer) and the new ASP.NET 5 project template for a console application. This should create a `project.json` targeting the new `DNX 4.5.1` and `DNX Core 5.0` and a simple `Program.cs`
+
+    public class Program
+    {
+        public void Main(string[] args)
+        {
+        }
+    }
+
+To use the `Microsoft.Framework.Runtime.Abstractions` NuGet package in our console app, we have to add it as dependency to the `project.json` file:
 
 	  "dependencies": {
 	    "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta6-*"
@@ -51,6 +62,8 @@ To use the package in our console app, we have to add the package as dependency 
 
 > **Note:**
 > The version may vary, at the time of writing this article, it was `beta6`.
+> Until all this gets released, there might be breaking changes across versions. Make sure that all Framework and System packages are of the same milestone, e.g. don't mix beta 4 and beta 5 packages.
+> Also, make sure you run your app with a version of `DNX` which matches with the version of the packages you have installed. 
 
 Now, we add those interfaces as parameters to the constructor of our app. In the following example we use the console output to print some of the information those interfaces provide:
 
@@ -67,6 +80,46 @@ Now, we add those interfaces as parameters to the constructor of our app. In the
 	
 	public void Main(string[] args) { ... }
 
+## Configuration
+ASP.NET 5 also comes with a new configuration framework. We will not go into too much detail of how this replaces `app/web.config`. But in general it is collection of string based `key value` pairs.
+The main NuGet package `Microsoft.Framework.Configuration` comes with a `ConfigurationBuilder` class which can be used to combine different configuration sources into one collection of `key value` pairs.
+
+The subsequent packages, like `Microsoft.Framework.Configuration.EnvironmentVariables` and `Microsoft.Framework.Configuration.Json`, add extension methods to the `ConfigurationBuilder` to access specific configuration sources.
+
+### Example
+For our example, we want to retrieve all environment variables, like `PATH` or `USERPROFILE`, and print the `key` and `value` to the console output.
+
+In addition to the `Microsoft.Framework.Runtime.Abstractions` above, we add a dependency reference to `Microsoft.Framework.Configuration.EnvironmentVariables` to the `project.json` file. 
+This package already has a dependency to `Microsoft.Framework.Configuration` and, which means we don't have to reference it explicitly.
+
+	  "dependencies": {
+	    "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta6-*",
+	    "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta6-*",
+	    ...
+	  },
+
+In the constructor of our app, we can now instantiate a new `ConfigurationBuilder` and call the extension methods.
+
+    var configuration = new ConfigurationBuilder()
+        .AddEnvironmentVariables()
+        .Build();
+
+To print all variables to the console we can simply iterate over all available key value pairs.
+
+    foreach(var config in configuration.GetConfigurationSections())
+    {
+        Console.WriteLine("{0}={1}", config.Key, configuration.Get(config.Key));
+    }
+
+There is another thing called user secrets. User secrets are retrieve from the profile of the user account the app's context is instantiate for, e.g. `%APPDATA%\microsoft\UserSecrets\<applicationId>\secrets.json` on windows.
+Read more about how to configure user secrets on the [ASP.NET wiki page][aspnet_secrets].
+The concept is the same as above mentioned environment variables, you can add the configured user secrets to the `key value` collection by calling the `AddUserSecrets` extension on the `ConfigurationBuilder`.
+
+### Usage of Configuration
+Both concepts, environment variables and user secrets configuration, can be used to keep security related information away from your source code. 
+We never ever want to check in database passwords or Windows Azure tokens and keys to github or any other source control. 
+This way we can define security related settings per environment and read them at runtime, and never add those to a configuration file which gets checked into source control!
+
 ## More Resources and Examples
 * [DNX Overview][dnx_overview]
 * [DNX Wiki][dnx_wiki]
@@ -79,5 +132,6 @@ Injecting `IAssemblyLoaderContainer` and `IAssemblyLoadContextAccessor`
 [dnx_wiki]: https://github.com/aspnet/Home/wiki/DNX-structure
 [git_types]: https://github.com/dotnet/coreclr/issues/919
 [git_loader]: https://github.com/aspnet/Entropy/blob/dev/samples/Runtime.CustomLoader/Program.cs
+[aspnet_secrets]: https://github.com/aspnet/Home/wiki/DNX-Secret-Configuration
 
 [TOC]
