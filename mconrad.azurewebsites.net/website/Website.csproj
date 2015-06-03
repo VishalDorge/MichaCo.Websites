@@ -169,6 +169,7 @@
     <Content Include="Articles\cachemanager_readme.html" />
     <Content Include="Articles\cachemanager_synchronization.html" />
     <Content Include="Articles\cachemanager_update.html" />
+    <Content Include="browserconfig.xml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -197,10 +198,12 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="large.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Articles\aspnet_5_accessing_environment_variables.md" />
     <Content Include="Articles\aspnet_5_accessing_environment_variables.html" />
+    <Content Include="wide.jpg" />
     <None Include="CacheManagerCfg.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -249,6 +252,8 @@
     <Content Include="sitemap.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="square.png" />
+    <Content Include="tiny.png" />
     <Content Include="Views\Documentation\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
