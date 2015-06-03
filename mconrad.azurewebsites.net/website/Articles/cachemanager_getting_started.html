@@ -1,13 +1,15 @@
 ﻿<h1 id="getting-started-with-cache-manager">Getting Started with Cache Manager</h1>
 
+
+
 <h2 id="basics">Basics</h2>
 
 <p>
-    Cache Manager is structured into many different Nuget packages. <br>
-    The one which is common but must not be installed stand alone is CacheManager.Core. All other packages will add functionality, cache handles and other features, which are totally optional.
+	Cache Manager is structured into many different Nuget packages. <br>
+	The one which is common but must not be installed stand alone is CacheManager.Core. All other packages will add functionality, cache handles and other features, which are totally optional.
 </p>
 
-<p>To get more details about the Cache Manager packages and features, read the <a href="http://mconrad.azurewebsites.net/Home/CacheManager">readme file</a> and the <a href="http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_architecture">features article</a>.</p>
+<p>To get more details about the Cache Manager packages and features, read the <a href="http://cachemanager.net/CacheManager">readme file</a> and the <a href="http://cachemanager.net/Documentation/Index/cachemanager_architecture">features article</a>.</p>
 
 <p>But now let’s get started…</p>
 
@@ -24,8 +26,8 @@
 <p><img src="https://github.com/MichaCo/CacheManager/raw/master/Articles/media/cachemanager-getting-started/add-nuget.jpg" alt="Add nuget" title=""></p>
 
 <p>
-    Select the “CacheManager.SystemRuntimeCaching” package and hit “Install”. <br>
-    This will actually install already all you need to use cache manager with the <code>System.Runtime.Caching</code> based in-process cache.
+	Select the “CacheManager.SystemRuntimeCaching” package and hit “Install”. <br>
+	This will actually install already all you need to use cache manager with the <code>System.Runtime.Caching</code> based in-process cache.
 </p>
 
 <p>Now let’s add some code to the newly created program.cs <code>Main</code> method:</p>
@@ -48,8 +50,8 @@ namespace ConsoleApplication
 </code></pre>
 
 <p>
-    This will create a new Cache Manager instance. <br>
-    To use the instance, we can add some test code. We will add two items, updated the second and then read both keys.
+	This will create a new Cache Manager instance. <br>
+	To use the instance, we can add some test code. We will add two items, updated the second and then read both keys.
 </p>
 
 <pre><code>cache.Add("keyA", "valueA");
@@ -58,8 +60,8 @@ cache.Update("keyB", v =&gt; 42);
 </code></pre>
 
 <p>
-    Let’s also remove one key and see if it worked… <br>
-    The full code example:
+	Let’s also remove one key and see if it worked… <br>
+	The full code example:
 </p>
 
 <pre><code>static void Main(string[] args)
@@ -83,14 +85,14 @@ cache.Update("keyB", v =&gt; 42);
 <p>Hopefully this worked out just fine. Now you should be set to play around with the Cache Manager!</p>
 
 <p>
-    <div class="toc">
-        <ul>
-            <li>
-                <a href="#getting-started-with-cache-manager">Getting started with Cache Manager</a><ul>
-                    <li><a href="#basics">Basics</a></li>
-                    <li><a href="#new-console-application">New Console Application</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+	<div class="toc">
+		<ul>
+			<li>
+				<a href="#getting-started-with-cache-manager">Getting Started with Cache Manager</a><ul>
+					<li><a href="#basics">Basics</a></li>
+					<li><a href="#new-console-application">New Console Application</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
 </p>

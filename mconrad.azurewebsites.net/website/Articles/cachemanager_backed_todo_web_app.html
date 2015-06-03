@@ -1,13 +1,13 @@
 ﻿<h1 id="single-page-todo-app-with-cache-manager">Single Page Todo App with Cache Manager</h1>
 
 <p>
-    This is about creating a single page web site using an ASP.NET Web API Service which stores the data via Cache Manager.  <br>
-    I will explain the service implementation and usage of Cache Manager, and also discuss how to host the newly created site on Azure and how to configure Azure’s Redis cache.
+	This is about creating a single page web site using an ASP.NET Web API Service which stores the data via Cache Manager.  <br>
+	I will explain the service implementation and usage of Cache Manager, and also discuss how to host the newly created site on Azure and how to configure Azure’s Redis cache.
 </p>
 
 <p>
-    To implement the site, I will use an existing AngularJS based <a href="https://github.com/tastejs/todomvc/tree/gh-pages/examples/angularjs">example</a> from <a href="http://todomvc.com/">todomvc.com</a>.  <br>
-    All credits for this part of this sample site goes to them of course.
+	To implement the site, I will use an existing AngularJS based <a href="https://github.com/tastejs/todomvc/tree/gh-pages/examples/angularjs">example</a> from <a href="http://todomvc.com/">todomvc.com</a>.  <br>
+	All credits for this part of this sample site goes to them of course.
 </p>
 
 <p>You can see the sample site in action on <a href="http://cachemanager-todo.azurewebsites.net/">cachemanager-todo.azurewebsites.net</a> or <a href="https://github.com/MichaCo/MichaCo.Websites/tree/master/cachemanager-todo.azurewebsites.net/Website">browse the code on Github</a>.</p>
@@ -16,38 +16,46 @@
 
 <p><img src="https://github.com/MichaCo/CacheManager/raw/master/Articles/media/cachemanager-single-page-todo-app/todo-app.jpg" alt="todomvc example" title=""></p>
 
+
+
 <h2 id="basic-functionality">Basic Functionality</h2>
 
 <p>With this simple app, the user can add new todos, edit existing ones, delete them and set them to completed state. There is also a delete “all completed” function.</p>
+
+
 
 <h2 id="service-definition">Service Definition</h2>
 
 <p>This single page application will use a web API service to store or remove the todos and which has to provide the following methods:</p>
 
 <ul>
-    <li><code>Get</code> - Retrieves all existing <code>todo</code>s</li>
-    <li><code>Get(id)</code> - Retrieves one <code>todo</code> by <code>id</code></li>
-    <li><code>Post(todo)</code> - Creates a new <code>todo</code>, assigns a new <code>id</code> and returns it.</li>
-    <li><code>Put(todo)</code> - Updates the <code>todo</code></li>
-    <li><code>Delete(id)</code> - Removes one <code>todo</code> by <code>id</code></li>
-    <li><code>Delete</code> - Removes all completed <code>todo</code>s</li>
+	<li><code>Get</code> - Retrieves all existing <code>todo</code>s</li>
+	<li><code>Get(id)</code> - Retrieves one <code>todo</code> by <code>id</code></li>
+	<li><code>Post(todo)</code> - Creates a new <code>todo</code>, assigns a new <code>id</code> and returns it.</li>
+	<li><code>Put(todo)</code> - Updates the <code>todo</code></li>
+	<li><code>Delete(id)</code> - Removes one <code>todo</code> by <code>id</code></li>
+	<li><code>Delete</code> - Removes all completed <code>todo</code>s</li>
 </ul>
+
+
 
 <h2 id="project-setup">Project setup</h2>
 
 <p>
-    I will implement the service with ASP.NET Web API, so let’s create an empty Web API project and add the sample code to it.  Our solution will look like that: <br>
-    <img src="https://github.com/MichaCo/CacheManager/raw/master/Articles/media/cachemanager-single-page-todo-app/adding-todosample-into-webapi-project.jpg" alt="enter image description here" title="">
+	I will implement the service with ASP.NET Web API, so let’s create an empty Web API project and add the sample code to it.  Our solution will look like that: <br>
+	<img src="https://github.com/MichaCo/CacheManager/raw/master/Articles/media/cachemanager-single-page-todo-app/adding-todosample-into-webapi-project.jpg" alt="enter image description here" title="">
 </p>
 
 <blockquote>
-    <p>
-        <strong>Hint</strong> <br>
-        Don’t worry, you can simply get the full source code of this sample from the <a href="https://github.com/MichaCo/MichaCo.Websites/tree/master/cachemanager-todo.azurewebsites.net/Website">Github repository</a>.
-    </p>
+	<p>
+		<strong>Hint</strong> <br>
+		Don’t worry, you can simply get the full source code of this sample from the <a href="https://github.com/MichaCo/MichaCo.Websites/tree/master/cachemanager-todo.azurewebsites.net/Website">Github repository</a>.
+	</p>
 </blockquote>
 
 <p>I also installed some additional nuget packages, CacheManager packages, Unity and Json.Net.</p>
+
+
 
 <h2 id="model">Model</h2>
 
@@ -74,13 +82,15 @@ namespace Website.Models
 
 <p>To get the JavaScript typical <code>camelCase</code> casing, we define the <code>JsonProperty</code>’s name. Also, we have to mark the object to be <code>Serializable</code> otherwise cache handles like the Redis handle cannot store the <code>Todo</code> entity.</p>
 
+
+
 <h2 id="setting-up-cache-manager">Setting Up Cache Manager</h2>
 
 <p>Our service should use Cache Manager to store and retrieve the todo items. To make the Cache Manager instance accessible by the controller, I will use Unity as IoC container. This could be done in many different ways of course, use whatever IoC container you prefer.</p>
 
 <p>
-    In <em>Global.asax</em> during app initialization (<code>Application_Start</code>), we just have to create the <code>IUnityContainer</code> and register the Cache Manager instance.  <br>
-    To have Unity inject the Cache Manager instance into our controller every time the controller gets instantiated by the framework we have to also tell the Web API framework to use Unity as the dependency resolver.
+	In <em>Global.asax</em> during app initialization (<code>Application_Start</code>), we just have to create the <code>IUnityContainer</code> and register the Cache Manager instance.  <br>
+	To have Unity inject the Cache Manager instance into our controller every time the controller gets instantiated by the framework we have to also tell the Web API framework to use Unity as the dependency resolver.
 </p>
 
 <pre><code>public class WebApiApplication : System.Web.HttpApplication
@@ -106,11 +116,13 @@ namespace Website.Models
 protected ICacheManager&lt;object&gt; todoCache { get; set; }
 </code></pre>
 
+
+
 <h2 id="implementing-the-rest-service">Implementing the Rest Service</h2>
 
 <p>
-    Let’s create the service. I will let MVC scaffold a full CRUD Web API controller.  <br>
-    The generated code will be using <code>string</code> as types, we’ll have to change that to our <code>Todo</code> model.
+	Let’s create the service. I will let MVC scaffold a full CRUD Web API controller.  <br>
+	The generated code will be using <code>string</code> as types, we’ll have to change that to our <code>Todo</code> model.
 </p>
 
 
@@ -120,10 +132,10 @@ protected ICacheManager&lt;object&gt; todoCache { get; set; }
 <p>We know we have to retrieve all and remove subsets of the todos. We could store the <code>Todo</code>s as <strong>one</strong> list but this is usually not very efficient if we think about scaling and performance. </p>
 
 <p>
-    The better solution is to store each item independently. <br>
-    That being said, this solution makes it a little bit more difficult to retrieve all <code>Todo</code>s from cache. <br>
-    One way of solving this is to put another key into the cache which stores all available <code>id</code>s.  <br>
-    This way, we also have a way to generate new <code>id</code>s; if we know all existing <code>id</code>s, we can simply create a new one…
+	The better solution is to store each item independently. <br>
+	That being said, this solution makes it a little bit more difficult to retrieve all <code>Todo</code>s from cache. <br>
+	One way of solving this is to put another key into the cache which stores all available <code>id</code>s.  <br>
+	This way, we also have a way to generate new <code>id</code>s; if we know all existing <code>id</code>s, we can simply create a new one…
 </p>
 
 <p>Let’s go ahead and implement this solution:</p>
@@ -149,6 +161,8 @@ protected ICacheManager&lt;object&gt; todoCache { get; set; }
        }
    }
 </code></pre>
+
+
 
 <h3 id="implementing-get-and-get-by-id">Implementing Get and Get by Id</h3>
 
@@ -190,8 +204,8 @@ protected ICacheManager&lt;object&gt; todoCache { get; set; }
 <p>Creating a new item is a little bit more complex because we store all the available ids on a separated cache key and to create new items, we have to “generated” unique ids.</p>
 
 <p>
-    To do this safely, even with distributed caches, we can use the Cache Manager’s <code>Update</code> method. <br>
-    If we would use <code>Put</code> or <code>Add</code> instead, we would run into concurrency issues with multiple clients using the same id for new items.
+	To do this safely, even with distributed caches, we can use the Cache Manager’s <code>Update</code> method. <br>
+	If we would use <code>Put</code> or <code>Add</code> instead, we would run into concurrency issues with multiple clients using the same id for new items.
 </p>
 
 <pre><code>   // POST: api/ToDo
@@ -212,11 +226,13 @@ protected ICacheManager&lt;object&gt; todoCache { get; set; }
 </code></pre>
 
 <p>
-    As discussed in <a href="http://mconrad.azurewebsites.net/Documentation/Index/cachemanager_update">the article about the <code>Update</code> method</a>, the <code>Action</code> you pass in might be called multiple times depending on version conflicts. We will always receive the “latest” value though, in this case <code>obj</code>. <br>
-    If a version conflict occurs during the update process, our changes will be discarded and the <code>Action</code> runs again, this means we will not add the new id multiple times, only the <code>Max</code> value will be different on every iteration.
+	As discussed in <a href="http://cachemanager.net/Documentation/Index/cachemanager_update">the article about the <code>Update</code> method</a>, the <code>Action</code> you pass in might be called multiple times depending on version conflicts. We will always receive the “latest” value though, in this case <code>obj</code>. <br>
+	If a version conflict occurs during the update process, our changes will be discarded and the <code>Action</code> runs again, this means we will not add the new id multiple times, only the <code>Max</code> value will be different on every iteration.
 </p>
 
 <p>At the end, we can set the <code>Id</code> property of our <code>Todo</code>, finally <code>Add</code> it to our cache and return it. </p>
+
+
 
 <h3 id="implementing-delete">Implementing Delete</h3>
 
@@ -237,6 +253,8 @@ protected ICacheManager&lt;object&gt; todoCache { get; set; }
    }
 </code></pre>
 
+
+
 <h3 id="implementing-delete-by-id">Implementing Delete by Id</h3>
 
 <p><code>Delete</code> by <code>Id</code> is similar to <code>Post</code>, we also have to update the key holding all the <code>Todo</code>s´ <code>id</code>s. Same thing here, we’ll use the <code>Update</code> method to ensure we work on the correct version of the array. </p>
@@ -254,11 +272,13 @@ protected ICacheManager&lt;object&gt; todoCache { get; set; }
    }
 </code></pre>
 
+
+
 <h2 id="using-cache-manager-to-scale">Using Cache Manager to Scale</h2>
 
 <p>
-    As you might have recognized, in the “Setting up Cache Manager” section of this article, I only specified one in-process cache handle. This would mean that our <code>Todo</code>s are stored in memory only and will be flushed whenever the app gets restarted. <br>
-    To persist our <code>Todo</code>s, we could use some distributed cache like <a href="http://redis.io/">Redis</a> or couchbase.
+	As you might have recognized, in the “Setting up Cache Manager” section of this article, I only specified one in-process cache handle. This would mean that our <code>Todo</code>s are stored in memory only and will be flushed whenever the app gets restarted. <br>
+	To persist our <code>Todo</code>s, we could use some distributed cache like <a href="http://redis.io/">Redis</a> or couchbase.
 </p>
 
 <p>With Cache Manager, this is extremely easy to change. Just a few lines of configuration and there are no changes needed in our API controller!</p>
@@ -275,6 +295,8 @@ protected ICacheManager&lt;object&gt; todoCache { get; set; }
 </code></pre>
 
 <p>The configuration now has two cache handles! A “first level” in-process cache, and the “second level” distributed cache. This way, we can reduce the traffic to the Redis server which will make our application a lot faster.</p>
+
+
 
 <h2 id="hosting">Hosting</h2>
 
@@ -294,9 +316,9 @@ protected ICacheManager&lt;object&gt; todoCache { get; set; }
 </code></pre>
 
 <p>
-    You can either add the connection string via <em>web.config</em> <code>ConnectionStrings</code> section, or add it via Azure Management Portal (which is the preferred way for security reasons…). <br>
-    On the Azure Management Portal, click on your web app, “All Settings”, “Application Settings” and scroll down to “Connection Strings” and add the connection string to the list. <br>
-    It should look similar to this:
+	You can either add the connection string via <em>web.config</em> <code>ConnectionStrings</code> section, or add it via Azure Management Portal (which is the preferred way for security reasons…). <br>
+	On the Azure Management Portal, click on your web app, “All Settings”, “Application Settings” and scroll down to “Connection Strings” and add the connection string to the list. <br>
+	It should look similar to this:
 </p>
 
 <p><img src="https://github.com/MichaCo/CacheManager/raw/master/Articles/media/cachemanager-single-page-todo-app/cachemanager-todo-appsettings.jpg" alt="Azure portal" title=""></p>
@@ -311,29 +333,29 @@ protected ICacheManager&lt;object&gt; todoCache { get; set; }
 <p>And that’s it, you can see the sample site in action on <a href="http://cachemanager-todo.azurewebsites.net/">cachemanager-todo.azurewebsites.net</a> and <a href="https://github.com/MichaCo/MichaCo.Websites/tree/master/cachemanager-todo.azurewebsites.net/Website">browse the code on Github</a>.</p>
 
 <p>
-    <div class="toc">
-        <ul>
-            <li>
-                <a href="#single-page-todo-app-with-cache-manager">Single Page Todo App with Cache Manager</a><ul>
-                    <li><a href="#basic-functionality">Basic Functionality</a></li>
-                    <li><a href="#service-definition">Service Definition</a></li>
-                    <li><a href="#project-setup">Project setup</a></li>
-                    <li><a href="#model">Model</a></li>
-                    <li><a href="#setting-up-cache-manager">Setting Up Cache Manager</a></li>
-                    <li>
-                        <a href="#implementing-the-rest-service">Implementing the Rest Service</a><ul>
-                            <li><a href="#how-do-we-store-the-items">How Do We Store the Items</a></li>
-                            <li><a href="#implementing-get-and-get-by-id">Implementing Get and Get by Id</a></li>
-                            <li><a href="#implementing-put">Implementing Put</a></li>
-                            <li><a href="#implementing-post">Implementing Post</a></li>
-                            <li><a href="#implementing-delete">Implementing Delete</a></li>
-                            <li><a href="#implementing-delete-by-id">Implementing Delete by Id</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#using-cache-manager-to-scale">Using Cache Manager to Scale</a></li>
-                    <li><a href="#hosting">Hosting</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+	<div class="toc">
+		<ul>
+			<li>
+				<a href="#single-page-todo-app-with-cache-manager">Single Page Todo App with Cache Manager</a><ul>
+					<li><a href="#basic-functionality">Basic Functionality</a></li>
+					<li><a href="#service-definition">Service Definition</a></li>
+					<li><a href="#project-setup">Project setup</a></li>
+					<li><a href="#model">Model</a></li>
+					<li><a href="#setting-up-cache-manager">Setting Up Cache Manager</a></li>
+					<li>
+						<a href="#implementing-the-rest-service">Implementing the Rest Service</a><ul>
+							<li><a href="#how-do-we-store-the-items">How Do We Store the Items</a></li>
+							<li><a href="#implementing-get-and-get-by-id">Implementing Get and Get by Id</a></li>
+							<li><a href="#implementing-put">Implementing Put</a></li>
+							<li><a href="#implementing-post">Implementing Post</a></li>
+							<li><a href="#implementing-delete">Implementing Delete</a></li>
+							<li><a href="#implementing-delete-by-id">Implementing Delete by Id</a></li>
+						</ul>
+					</li>
+					<li><a href="#using-cache-manager-to-scale">Using Cache Manager to Scale</a></li>
+					<li><a href="#hosting">Hosting</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
 </p>

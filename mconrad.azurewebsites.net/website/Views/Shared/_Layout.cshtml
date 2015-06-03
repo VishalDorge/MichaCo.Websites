@@ -9,6 +9,7 @@
     <meta http-equiv="Content-Language" content="en">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Content/css")
+	@Html.Partial("_GoogleTracking")
 </head>
 <body>
     @Html.Partial("Nav")
@@ -27,7 +28,6 @@
 
     @RenderSection("scripts", required: false)
     
-    @Html.Partial("_GoogleTracking")
     <script type="application/ld+json">
         {"@@context":"http://schema.org","@@type":"Product","name":"Cache Manager","description":"@Common.CacheManagerHeaderDescription","url":"http://mconrad.azurewebsites.net/","sameAs":["http://michaco.github.io/CacheManager","http://michaco.github.io/Documentation/CacheManager/Help"]}
     </script>
