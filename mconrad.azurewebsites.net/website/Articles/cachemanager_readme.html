@@ -15,6 +15,34 @@
 
 
 
+<h2 id="build-status">Build Status</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>Build Server</th>
+			<th>Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Windows, KoreBuild</td>
+			<td><a href="https://ci.appveyor.com/project/MichaCo/cachemanager"><img src="https://ci.appveyor.com/api/projects/status/lbi004cv6idhbr26?svg=true" alt="Build status" title=""></a></td>
+		</tr>
+		<tr>
+			<td>Windows, MSBuild</td>
+			<td><a href="https://ci.appveyor.com/project/MichaCo/cachemanager-at86a"><img src="https://ci.appveyor.com/api/projects/status/0uxi3saj5prdyulg?svg=true" alt="Build status" title=""></a></td>
+		</tr>
+		<tr>
+			<td>Linux, Mono</td>
+			<td><a href="https://travis-ci.org/MichaCo/CacheManager"><img src="https://travis-ci.org/MichaCo/CacheManager.svg?branch=master" alt="Build Status" title=""></a></td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+
 <h2 id="documentation">Documentation</h2>
 
 <p>Documentation can be found within the <a href="https://github.com/MichaCo/CacheManager/tree/master/Articles">articles folder</a> of the Cache Manager’s repository and  hosted on my <a href="http://michaconrad.com">website</a>:</p>
@@ -69,6 +97,8 @@
 			<th>Package Name</th>
 			<th align="center">.Net 4.0</th>
 			<th align="center">.Net 4.5</th>
+			<th align="center">DNX 4.5.1</th>
+			<th align="center">DNX Core</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -76,41 +106,43 @@
 			<td><a href="https://www.nuget.org/packages/CacheManager.Core">CacheManager.Core</a></td>
 			<td align="center">x</td>
 			<td align="center">x</td>
+			<td align="center">x</td>
+			<td align="center">x</td>
 		</tr>
 		<tr>
 			<td><a href="https://www.nuget.org/packages/CacheManager.StackExchange.Redis">CacheManager.StackExchange.Redis</a></td>
 			<td align="center">x</td>
 			<td align="center">x</td>
+			<td align="center">x</td>
+			<td align="center">-</td>
 		</tr>
 		<tr>
 			<td><a href="https://www.nuget.org/packages/CacheManager.SystemRuntimeCaching">CacheManager.SystemRuntimeCaching</a></td>
 			<td align="center">x</td>
 			<td align="center">x</td>
-		</tr>
-		<tr>
-			<td><a href="https://www.nuget.org/packages/CacheManager.AppFabricCache">CacheManager.AppFabricCache</a></td>
-			<td align="center">-</td>
 			<td align="center">x</td>
-		</tr>
-		<tr>
-			<td><a href="https://www.nuget.org/packages/CacheManager.WindowsAzureCaching">CacheManager.WindowsAzureCaching</a></td>
 			<td align="center">-</td>
-			<td align="center">x</td>
 		</tr>
 		<tr>
 			<td><a href="https://www.nuget.org/packages/CacheManager.Memcached">CacheManager.Memcached</a></td>
 			<td align="center">x</td>
 			<td align="center">x</td>
+			<td align="center">x</td>
+			<td align="center">-</td>
 		</tr>
 		<tr>
 			<td><a href="https://www.nuget.org/packages/CacheManager.Web">CacheManager.Web</a></td>
 			<td align="center">-</td>
 			<td align="center">x</td>
+			<td align="center">x</td>
+			<td align="center">-</td>
 		</tr>
 		<tr>
 			<td><a href="https://www.nuget.org/packages/CacheManager.Couchbase">CacheManager.Couchbase</a></td>
 			<td align="center">-</td>
 			<td align="center">x</td>
+			<td align="center">x</td>
+			<td align="center">-</td>
 		</tr>
 	</tbody>
 </table>
@@ -118,7 +150,7 @@
 
 
 
-<h2 id="features-in-version-05x">Features in Version: <a href="https://github.com/MichaCo/CacheManager/releases">0.5.x</a> <a href="https://travis-ci.org/MichaCo/CacheManager"><img src="https://travis-ci.org/MichaCo/CacheManager.svg?branch=master" alt="Build Status" title=""></a></h2>
+<h2 id="features-in-version-06x">Features in Version: <a href="https://github.com/MichaCo/CacheManager/releases">0.6.x</a></h2>
 
 <ul>
 	<li>One common interface for handling different caching technologies: <code>ICache&lt;T&gt;</code></li>
@@ -130,8 +162,6 @@
 			<li><strong>Redis</strong> using <a href="https://github.com/StackExchange/StackExchange.Redis">StackExchange.Redis</a></li>
 			<li><strong>Memcached</strong> using <a href="https://github.com/enyim/EnyimMemcached">Enyim.Memcached</a></li>
 			<li><strong>Couchbase</strong> using <a href="https://github.com/couchbase/couchbase-net-client">Couchbase.Net.Client v2</a></li>
-			<li>AppFabric cache (might get removed)</li>
-			<li>Azure cache (might get removed)</li>
 		</ul>
 	</li>
 	<li>
@@ -182,7 +212,7 @@
 			<li>(Other implementations without Redis might be an option for a later version)</li>
 		</ul>
 	</li>
-	<li>Supports .Net 4.0, .Net 4.5</li>
+	<li>Supports .Net 4.0, .Net 4.5, <strong>ASP.NET DNX 4.5.1 and Core</strong></li>
 </ul>
 
 <p>
@@ -190,10 +220,11 @@
 		<ul>
 			<li>
 				<a href="#cachemanager">CacheManager</a><ul>
+					<li><a href="#build-status">Build Status</a></li>
 					<li><a href="#documentation">Documentation</a></li>
 					<li><a href="#examples">Examples</a></li>
 					<li><a href="#cachemanager-nuget-packages">CacheManager Nuget Packages</a></li>
-					<li><a href="#features-in-version-05x">Features in Version: 0.5.x </a></li>
+					<li><a href="#features-in-version-06x">Features in Version: 0.6.x</a></li>
 				</ul>
 			</li>
 		</ul>
