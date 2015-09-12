@@ -1,45 +1,43 @@
 ﻿<h1 id="cache-synchronization">Cache Synchronization</h1>
 
-
-
 <h2 id="multi-layer-use-case">Multi-Layer Use Case</h2>
 
-<p>A common, more complex scenario would be, that you have a distributed cache, e.g. Redis, and you want to access that layer from multiple clients and share the cached data across those clients because the creation of the cached items is expensive, or you want to store data in one place and use it by multiple clients…  </p>
+<p>A common scenario would be, that you have a distributed cache, e.g. Redis, and you want to access that layer from multiple clients to share the cached data across those clients, because e.g. the creation of the cached items is expensive, or you want to simply store shared data. </p>
 
 <p>Distributed caches are fast, but not as fast as in-process caches which keep your cache values in memory and do not have to use expensive serialization or network resources.   </p>
 
 <p>
-    In addition an application will usually read from cache a lot more than writing to it.  <br>
-    Now if we put an in-process cache in front of the distributed cache, to read directly from memory, this would drastically increase the overall application’s performance. <br>
-    To give you just a rough idea of the read performance difference, it can be up to 100 times faster or even more… <br>
-    If a Redis cache for example can handle 10k Gets per second, a memory cache can perfrom 2 million.
+	In addition an application will usually read from cache a lot more than writing to it.  <br>
+	Now if we put an in-process cache in front of the distributed cache, to read directly from memory, this would drastically increase the overall application’s performance. <br>
+	To give you just a rough idea of the read performance difference, it can be up to 100 times faster or even more… <br>
+	If a Redis cache for example can handle 10k Gets per second, a memory cache can perform 2 million.
 </p>
-
-
 
 <h3 id="challenges">Challenges</h3>
 
 <p>
-    There are some challenges with this scenario. We now store cache values in memory, what happens if the cache item was removed from cache by one client… <br>
-    Of course, it will still be cached in memory by all other clients.
+	There are some challenges with this scenario. We now store cache values in memory, what happens if the cache item was removed from cache by one client… <br>
+	Of course, it will still be cached in memory by all other clients.
 </p>
 
 <p>Let’s take the following scenario: </p>
 
 <ul>
-    <li>
-        ClientA removes an item from the cache.  <br>
-        <ul><li>Cache Manager will call <code>Remove</code> on both cache handles.</li></ul>
-    </li>
-    <li>
-        ClientB does a Get on the same item <br>
-        <ul><li>Cache Manager doesn’t find the item in the distributed cache, but in the in-process cache layer of ClientB</li></ul>
-    </li>
+	<li>
+		ClientA removes an item from the cache.  <br>
+		<ul><li>Cache Manager will call <code>Remove</code> on both cache handles.</li></ul>
+	</li>
+	<li>
+		ClientB does a Get on the same item <br>
+		<ul><li>Cache Manager doesn’t find the item in the distributed cache, but in the in-process cache layer of ClientB</li></ul>
+	</li>
 </ul>
 
 <p>This means that ClientB works with out of sync data. </p>
 
 <p>To prevent this, Cache Manager has a feature called <strong>CacheBackPlate</strong> which will try to synchronize multiple cache clients.</p>
+
+
 
 <h2 id="cache-back-plates">Cache Back Plates</h2>
 
@@ -54,7 +52,7 @@
 <pre><code>    &lt;cache 
         name="redisWithBackPlate" 
         backPlateName="redis1" 
-        backPlateType="CacheManager.StackExchange.Redis.RedisCacheBackPlate, CacheManager.StackExchange.Redis"&gt;
+        backPlateType="CacheManager.Redis.RedisCacheBackPlate, CacheManager.StackExchange.Redis"&gt;
       &lt;handle name="default" ref="systemCache"/&gt;
       &lt;handle name="redis1" ref="redis" expirationMode="None" isBackPlateSource="true"/&gt;
     &lt;/cache&gt;
@@ -81,19 +79,17 @@
 </code></pre>
 
 <p>
-    In both cases configuring a back plate requires <strong>one cache handle</strong> being set as the back plate’s source.  <br>
-    In case of the xml configuration, it is the <code>isBackPlateSource</code> attribute on the cacheHandle tag and by code it is the second parameter on the <code>WithHandle</code> method being set to true.
+	In both cases configuring a back plate requires <strong>one cache handle</strong> being set as the back plate’s source.  <br>
+	In case of the xml configuration, it is the <code>isBackPlateSource</code> attribute on the cacheHandle tag and by code it is the second parameter on the <code>WithHandle</code> method being set to true.
 </p>
-
-
 
 <h3 id="back-plates-source">Back Plate’s Source</h3>
 
 <p>The back plate’s source is usually the one distributed cache layer of the Cache Manager instance. </p>
 
 <p>
-    When for example an item gets removed by one client, the other client has to remove the same item from all other cache handles but the source (because it was already removed). So for remove this is not that important. <br>
-    But let’s say a cache item was updated by ClientA and ClientB still has the old version in local in-process cache. With the source being set, Cache Manager can evict the item from all ClientB’s local in-process caches and on the next <code>Get</code> the new version will be retrieved from the “source”.
+	When for example an item gets removed by one client, the other client has to remove the same item from all other cache handles but the source (because it was already removed). So for remove this is not that important. <br>
+	But let’s say a cache item was updated by ClientA and ClientB still has the old version in local in-process cache. With the source being set, Cache Manager can evict the item from all ClientB’s local in-process caches and on the next <code>Get</code> the new version will be retrieved from the “source”.
 </p>
 
 
@@ -101,31 +97,32 @@
 <h3 id="how-does-it-work">How does it work?</h3>
 
 <p>
-    The back plate works with messages. Every time an item gets removed or updated Cache Manager will send a message to the back plate storing the information needed to update the other clients. <br>
-    All other clients will receive those messages asynchronously and will react accordingly.
+	The back plate works with messages. Every time an item gets removed or updated Cache Manager will send a message to the back plate storing the information needed to update the other clients. <br>
+	All other clients will receive those messages asynchronously and will react accordingly.
 </p>
 
 <p>That being said, because of the network traffic generated and the overhead that produces, the performance of the cache will be go down slightly. Also, the synchronization will not happen on all clients at the same time, so there might be (very small) delays. </p>
 
 <p>
-    <div class="toc">
-        <ul>
-            <li>
-                <a href="#cache-synchronization">Cache Synchronization</a><ul>
-                    <li>
-                        <a href="#multi-layer-use-case">Multi-Layer Use Case</a><ul>
-                            <li><a href="#challenges">Challenges</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#cache-back-plates">Cache Back Plates</a><ul>
-                            <li><a href="#configuration">Configuration</a></li>
-                            <li><a href="#back-plates-source">Back Plate’s Source</a></li>
-                            <li><a href="#how-does-it-work">How does it work?</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+	<div class="toc">
+		<ul>
+			<li>
+				<a href="#cache-synchronization">Cache Synchronization</a><ul>
+					<li><a href="#introduction">Introduction</a></li>
+					<li>
+						<a href="#multi-layer-use-case">Multi-Layer Use Case</a><ul>
+							<li><a href="#challenges">Challenges</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#cache-back-plates">Cache Back Plates</a><ul>
+							<li><a href="#configuration">Configuration</a></li>
+							<li><a href="#back-plates-source">Back Plate’s Source</a></li>
+							<li><a href="#how-does-it-work">How does it work?</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
 </p>
