@@ -20,18 +20,22 @@ namespace Website.Test
         {
             container = new UnityContainer();
 
-            var cache = CacheFactory.Build("todos", settings =>
+            var cacheConfig = ConfigurationBuilder.BuildConfiguration(settings =>
             {
                 settings
+                    .WithJsonSerializer()
                     .WithSystemRuntimeCacheHandle("inprocess")
                     .And
                     .WithRedisConfiguration("redisLocal", "localhost:6379,ssl=false,allowAdmin=true")
                     .WithRedisBackPlate("redisLocal")
                     .WithRedisCacheHandle("redisLocal", true);
             });
-
-            container.RegisterInstance(cache);
-            container.RegisterInstance(cache);
+            
+            container.RegisterType(
+                typeof(ICacheManager<>),
+                new ContainerControlledLifetimeManager(),
+                new InjectionFactory(
+                    (c, t, n) => CacheFactory.FromConfiguration(t.GetGenericArguments()[0], cacheConfig)));
         }
 
         [TestMethod]

@@ -16,17 +16,20 @@ namespace Website
             GlobalConfiguration.Configure(WebApiConfig.Register);
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
 
-            var cache = CacheFactory.Build("todos", settings =>
+            var cacheConfig = ConfigurationBuilder.BuildConfiguration(settings =>
             {
                 settings
                     .WithSystemRuntimeCacheHandle("inprocess");
                 ////.WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(10));
-                ////.And
-                ////.WithRedisBackPlate("redis")
-                ////.WithRedisCacheHandle("redis", true);
+                ////settings.WithRedisBackPlate("redisConnection");
+                ////settings.WithRedisCacheHandle("redisConnection", true);
             });
 
-            container.RegisterInstance(cache);
+            container.RegisterType(
+                typeof(ICacheManager<>),
+                new ContainerControlledLifetimeManager(),
+                new InjectionFactory(
+                    (c, t, n) => CacheFactory.FromConfiguration(t.GetGenericArguments()[0], cacheConfig)));
         }
     }
 }

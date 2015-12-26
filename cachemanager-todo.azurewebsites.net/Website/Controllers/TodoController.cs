@@ -18,24 +18,27 @@ namespace Website.Controllers
         private const string KeysKey = "todo-sample-keys";
 
         // retrieves all todos' keys or adds an empty int array if the key is not set
-        private List<int> AllKeys
+        private IList<int> AllKeys
         {
             get
             {
-                var keys = todoCache.Get<int[]>(KeysKey);
+                var keys = keysCache.Get(KeysKey);
 
                 if (keys == null)
                 {
                     keys = new int[] { };
-                    todoCache.Add(KeysKey, keys);
+                    keysCache.Add(KeysKey, keys);
                 }
 
-                return keys.ToList();
+                return keys;
             }
         }
 
         [Dependency]
-        protected ICacheManager<object> todoCache { get; set; }
+        protected ICacheManager<Todo> todoCache { get; set; }
+        
+        [Dependency]
+        protected ICacheManager<IList<int>> keysCache { get; set; }
 
         // GET: api/ToDo
         public IEnumerable<Todo> Get()
@@ -53,21 +56,16 @@ namespace Website.Controllers
         }
 
         // GET: api/ToDo/5
-        public Todo Get(int id)
-        {
-            return todoCache.Get<Todo>(TodoKeyPrefix + id);
-        }
+        public Todo Get(int id) => todoCache.Get<Todo>(TodoKeyPrefix + id);
 
         // POST: api/ToDo
         public Todo Post([FromBody]Todo value)
         {
             int newId = -1;
-            todoCache.Update(KeysKey, obj =>
+            keysCache.Update(KeysKey, keys =>
             {
-                var keys = (obj as int[]).ToList();
                 newId = !keys.Any() ? 1 : keys.Max() + 1;
-                keys.Add(newId);
-                return keys.ToArray();
+                return keys.Concat(new[] { newId }).ToList();
             });
 
             value.Id = newId;
@@ -100,11 +98,11 @@ namespace Website.Controllers
         public void Delete(int id)
         {
             todoCache.Remove(TodoKeyPrefix + id);
-            todoCache.Update(KeysKey, obj =>
+            keysCache.Update(KeysKey, obj =>
             {
-                var keys = (obj as int[]).ToList();
+                var keys = obj.ToList();
                 keys.Remove(id);
-                return keys.ToArray();
+                return keys;
             });
         }
     }
