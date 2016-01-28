@@ -52,11 +52,21 @@
             <th align="center">.Net 4.5</th>
             <th align="center">DNX 4.5.1</th>
             <th align="center">Dotnet 5.2</th>
+            <th align="center">Dotnet 5.4</th>
         </tr>
     </thead>
     <tbody>
         <tr>
+            <td><a href="https://">CacheManager.AspNetCore.Logging</a></td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">x</td>
+            <td align="center">-</td>
+            <td align="center">x</td>
+        </tr>
+        <tr>
             <td><a href="https://www.nuget.org/packages/CacheManager.Core">CacheManager.Core</a></td>
+            <td align="center">x</td>
             <td align="center">x</td>
             <td align="center">x</td>
             <td align="center">x</td>
@@ -68,12 +78,14 @@
             <td align="center">x</td>
             <td align="center">x</td>
             <td align="center">x</td>
+            <td align="center">x</td>
         </tr>
         <tr>
             <td><a href="https://www.nuget.org/packages/CacheManager.StackExchange.Redis">CacheManager.StackExchange.Redis</a></td>
             <td align="center">x</td>
             <td align="center">x</td>
             <td align="center">x</td>
+            <td align="center">-</td>
             <td align="center">-</td>
         </tr>
         <tr>
@@ -82,12 +94,14 @@
             <td align="center">x</td>
             <td align="center">x</td>
             <td align="center">-</td>
+            <td align="center">-</td>
         </tr>
         <tr>
             <td><a href="https://www.nuget.org/packages/CacheManager.Memcached">CacheManager.Memcached</a></td>
             <td align="center">x</td>
             <td align="center">x</td>
             <td align="center">x</td>
+            <td align="center">-</td>
             <td align="center">-</td>
         </tr>
         <tr>
@@ -96,12 +110,14 @@
             <td align="center">x</td>
             <td align="center">x</td>
             <td align="center">-</td>
+            <td align="center">-</td>
         </tr>
         <tr>
             <td><a href="https://www.nuget.org/packages/CacheManager.Couchbase">CacheManager.Couchbase</a></td>
             <td align="center">-</td>
             <td align="center">x</td>
             <td align="center">x</td>
+            <td align="center">-</td>
             <td align="center">-</td>
         </tr>
     </tbody>
@@ -194,13 +210,21 @@
         The interfaced provides a simple update method which internally ensures you work with the latest version. <br>
         And CacheManager handles version conflicts for you.
     </li>
+    <li>
+        <strong>Logging</strong> CacheManager comes with an extensible logging API ([see samples] (<a href="https://github.com/MichaCo/CacheManager/blob/master/samples/CacheManager.Examples/Program.cs#L31">https://github.com/MichaCo/CacheManager/blob/master/samples/CacheManager.Examples/Program.cs#L31</a>)). <br>
+        <ul>
+            <li>All standard cache operations are logged</li>
+            <li>Based on log levels more or less information will be logged (try Trace and Debug)</li>
+            <li>Current concrete implementation is based on the ASP.NET Core logging. Other implementation of CacheManager’s ILoggerFactory might follow.</li>
+        </ul>
+    </li>
     <li><strong>Strongly typed</strong> cache interface.</li>
     <li>
         <strong>Multiple layers</strong> <br>
-        By having multiple cache handles managed by CacheManager, you can easily implement layered caches. For example an in process cache infront of your distributed cache, to make read access faster. <br>
+        By having multiple cache handles managed by CacheManager, you can easily implement layered caches. For example an in process cache in front of your distributed cache, to make read access faster. <br>
         CacheManager will synchronize those layers for you.  <br>
         <ul>
-            <li><code>Put</code> and <code>Add</code> operations will always be excecuted on all cache handles registered on the manager.</li>
+            <li><code>Put</code> and <code>Add</code> operations will always be executed on all cache handles registered on the manager.</li>
             <li>
                 On <code>Get</code>, there are different configuration options defined by <code>CacheUpdateMode</code>, if the item was available in one cache handle: <br>
                 <ul>
@@ -224,12 +248,12 @@
         This can be used to for example group elements and remove all of them at once.
     </li>
     <li><strong>Statistics</strong>: Counters for all kind of cache actions.</li>
-    <li><strong>Performance Counters</strong>: To be able to inspect certain numbers with perfmon, CacheManager supports performance counters per instance of the manager and per cache handle.</li>
+    <li><strong>Performance Counters</strong>: To be able to inspect certain numbers with <code>perfmon</code>, CacheManager supports performance counters per instance of the manager and per cache handle.</li>
     <li>
         <strong>Event System</strong>: CacheManager triggers events for common cache actions: <br>
         OnGet, OnAdd, OnPut, OnRemove, OnClear, OnClearRegion
     </li>
-    <li><strong>System.Web.OutputCache</strong> implementation to use CacheManager as OutputCache provider which makes the OutputCache extremly flexible, for example by using a distributed cache like Redis across many web servers.</li>
+    <li><strong>System.Web.OutputCache</strong> implementation to use CacheManager as OutputCache provider which makes the OutputCache extremely flexible, for example by using a distributed cache like Redis across many web servers.</li>
     <li>
         <strong>Cache clients synchronization</strong>  <br>
         <ul>
