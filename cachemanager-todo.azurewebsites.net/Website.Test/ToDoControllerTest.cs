@@ -27,7 +27,7 @@ namespace Website.Test
                     .WithSystemRuntimeCacheHandle("inprocess")
                     .And
                     .WithRedisConfiguration("redisLocal", "localhost:6379,ssl=false,allowAdmin=true")
-                    .WithRedisBackPlate("redisLocal")
+                    .WithRedisBackplane("redisLocal")
                     .WithRedisCacheHandle("redisLocal", true);
             });
             
