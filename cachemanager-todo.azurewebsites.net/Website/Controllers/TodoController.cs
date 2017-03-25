@@ -22,12 +22,12 @@ namespace Website.Controllers
         {
             get
             {
-                var keys = keysCache.Get(KeysKey);
+                var keys = KeysCache.Get(KeysKey);
 
                 if (keys == null)
                 {
                     keys = new int[] { };
-                    keysCache.Add(KeysKey, keys);
+                    KeysCache.Add(KeysKey, keys);
                 }
 
                 return keys;
@@ -35,10 +35,10 @@ namespace Website.Controllers
         }
 
         [Dependency]
-        protected ICacheManager<Todo> todoCache { get; set; }
-        
+        protected ICacheManager<Todo> TodoCache { get; set; }
+
         [Dependency]
-        protected ICacheManager<IList<int>> keysCache { get; set; }
+        protected ICacheManager<IList<int>> KeysCache { get; set; }
 
         // GET: api/ToDo
         public IEnumerable<Todo> Get()
@@ -56,27 +56,27 @@ namespace Website.Controllers
         }
 
         // GET: api/ToDo/5
-        public Todo Get(int id) => todoCache.Get<Todo>(TodoKeyPrefix + id);
+        public Todo Get(int id) => TodoCache.Get<Todo>(TodoKeyPrefix + id);
 
         // POST: api/ToDo
         public Todo Post([FromBody]Todo value)
         {
             int newId = -1;
-            keysCache.Update(KeysKey, keys =>
+            KeysCache.Update(KeysKey, keys =>
             {
                 newId = !keys.Any() ? 1 : keys.Max() + 1;
                 return keys.Concat(new[] { newId }).ToList();
             });
 
             value.Id = newId;
-            todoCache.Add(TodoKeyPrefix + newId, value);
+            TodoCache.Add(TodoKeyPrefix + newId, value);
             return value;
         }
 
         // PUT: api/ToDo/5
         public void Put(int id, [FromBody]Todo value)
         {
-            todoCache.Put(TodoKeyPrefix + id, value);
+            TodoCache.Put(TodoKeyPrefix + id, value);
         }
 
         // DELETE ALL completed: api/ToDo
@@ -97,8 +97,8 @@ namespace Website.Controllers
         // DELETE: api/ToDo/5
         public void Delete(int id)
         {
-            todoCache.Remove(TodoKeyPrefix + id);
-            keysCache.Update(KeysKey, obj =>
+            TodoCache.Remove(TodoKeyPrefix + id);
+            KeysCache.Update(KeysKey, obj =>
             {
                 var keys = obj.ToList();
                 keys.Remove(id);

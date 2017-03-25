@@ -19,10 +19,13 @@ namespace Website
             var cacheConfig = ConfigurationBuilder.BuildConfiguration(settings =>
             {
                 settings
-                    .WithSystemRuntimeCacheHandle("inprocess");
-                ////.WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(10));
-                ////settings.WithRedisBackPlate("redisConnection");
-                ////settings.WithRedisCacheHandle("redisConnection", true);
+                    .WithSystemRuntimeCacheHandle("inprocess")
+                        //.WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(10))
+                        ;
+
+                //settings.WithJsonSerializer();
+                //settings.WithRedisBackplane("redisConnection");
+                //settings.WithRedisCacheHandle("redisConnection");
             });
 
             container.RegisterType(
